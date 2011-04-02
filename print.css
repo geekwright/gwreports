@@ -1,0 +1,109 @@
+body {
+	padding: 0px;
+	background: white;
+	margin: 2em;
+	color: black;
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+}
+table,th, td
+{
+border: 1px solid black;
+}
+table {
+	padding: 0.2em; font-size: small; margin: 0px; width: 100%; border-collapse:collapse;
+}
+td {
+	padding: 0.2em; 
+	vertical-align: top; 
+}
+th {
+	vertical-align: middle; 
+	padding: 0.2em; 
+	background-color: #dddddd
+}
+a {
+	font-weight: bold; color: #111111; background-color: transparent; text-decoration: none
+}
+a:hover {
+	color: #000000;
+}
+h1 {
+	font-size: 150%; font-weight: bold; color: #000000;
+}
+h2 {
+	font-size: 120%; font-weight: bold; color: #000000;
+}
+h3 {
+	font-size: 100%; font-weight: bold; color: #000000;
+}
+h4 {
+	
+}
+h5 {
+	
+}
+ul {
+	padding-right: 2px; padding-left: 2px; list-style-position: inside; padding-bottom: 2px; margin: 2px; padding-top: 2px; list-style-type: decimal; text-align: left
+}
+li {
+	list-style-position: inside; margin-left: 2px; color: #2f5376; list-style-type: square
+}
+
+.outer {
+	border:1px solid silver;
+}
+.head {
+	font-weight: bold;
+	background-color: #eeeeee;
+}
+.even {
+	background-color: #eeeeee;
+}
+.odd {
+	background-color: transparent;
+}
+.foot {
+	font-weight: bold; background-color: #eeeeee
+}
+tr.even td {
+	background-color: #eeeeee;
+}
+tr.odd td {
+	background-color: #ffffff;
+}
+
+img {
+	border: 0px;
+}
+
+tr.sumbreak hr
+{
+	height: 1px; border-style: dotted;
+}
+
+tr.sumtotal hr
+{
+	height: 1px; border-style: solid;
+}
+tr.sumbreak td
+{
+	border: 0px;
+}
+
+tr.sumtotal td
+{
+	border: 0px;
+}
+.caption-marker { display: none; }
+.parmform table {
+	width: 50%;
+}
+
+.parmform th {
+	font-size: 0.9em;
+}
+
+.parmform td.head {
+	width: 33%;
+	font-size: 0.9em;
+}

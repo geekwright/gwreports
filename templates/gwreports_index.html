@@ -1,0 +1,62 @@
+<{if isset($bc_modtitle)}>
+<div class="breadcrumb">
+<a href="index.php"><{$bc_modtitle}></a>
+<{if isset($bc_topic)}>
+ &gt; <a href="index.php?tid=<{$bc_tid}>"><{$bc_topic}></a>
+<{/if}>
+<{if isset($bc_report)}>
+ &gt; <a href="report_view.php?rid=<{$bc_rid}>"><{$bc_report}></a>
+<{/if}>
+<br /><hr /></div>
+<{/if}>
+<{if isset($title)}>
+<div class="content_body">
+<h1><{$title}></h1>
+</div>
+<{/if}>
+<{if isset($page_message)}>
+<div class="content_body"><{$page_message}><br /><br /></div>
+<{/if}>
+<{if isset($err_message)}>
+<hr />
+<div class="errorMsg"><{$err_message}></div>
+<hr />
+<{/if}>
+<{if isset($message)}>
+<hr />
+<div class="resultMsg"><{$message}></div>
+<hr />
+<{/if}>
+
+<{if is_array($topics)}>
+<{if count($topics) > 0 }>
+<ul class='topiclist'>
+<{foreach key=tid item=topic from=$topics }>
+<li><a href="index.php?tid=<{$topic.topic_id}>" title="<{$topic.topic_description|truncate:250:'...':false}>"><{$topic.topic_name}></a></li>
+<{/foreach}>
+</ul>
+<{else}>
+<p><{$smarty.const._MD_GWREPORTS_TOPIC_EMPTY}></p>
+<{/if}>
+<br />
+<{/if}>
+
+<{if is_array($reports)}>
+<{if count($reports) > 0 }>
+<ul class='reportlist'>
+<{foreach key=rid item=report from=$reports }>
+<li><a href="report_view.php?rid=<{$report.report_id}>" title="<{$report.report_description|truncate:250:'...':false}>"><{$report.report_name}></a></li>
+<{/foreach}>
+</ul>
+<{else}>
+<p><{$smarty.const._MD_GWREPORTS_REPORT_EMPTY}></p>
+<{/if}>
+<br />
+<{/if}>
+
+<{if isset($body)}>
+<div><{$body}></div><br />
+<{/if}>
+<{if isset($debug)}>
+<div><{$debug}></div>
+<{/if}>

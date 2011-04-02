@@ -1,0 +1,37 @@
+th a {
+	color: #ccd;
+}
+.parmform table {
+	width: 75%;
+}
+
+.parmform th {
+	font-size: 0.9em;
+}
+
+.parmform td.head {
+	width: 33%;
+	font-size: 0.9em;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.parmform td.even {
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+tr.sumbreak hr
+{
+	height: 1px; border-style: dotted;
+}
+
+tr.sumtotal hr
+{
+	height: 1px; border-style: solid;
+}
+
+/* example of styling quick report block form */
+/*
+#leftcolumn .gwrptblockform strong { font-size: 1.0em; background-color: lightgrey; display: block; width: 100%; margin-top: 0.3em; border-bottom: 1px solid black; }
+*/
