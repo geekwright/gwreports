@@ -43,7 +43,7 @@ global $xoopsDB;
 }
 
 function cleaner($string,$htmlok=false) {
-	$string=trim($string);
+	if (get_magic_quotes_gpc()) $string = stripcslashes($string); 
 	$string=html_entity_decode($string);
 	if(!$htmlok) $string=strip_tags($string);
 	$string=trim($string);

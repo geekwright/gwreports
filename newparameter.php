@@ -74,6 +74,13 @@ if ($op!='display') {
 }
 
 if($op=='add') {
+	if(checkReservedParmameterName($parameter_name)) {
+		$op='display';
+		$err_message = _MD_GWREPORTS_PARAMETER_RESERVED;
+	}
+}
+
+if($op=='add') {
 	$myts = myTextSanitizer::getInstance();
 	$sl_parameter_name=$myts->addslashes($parameter_name);
 	$sl_parameter_description=$myts->addslashes($parameter_description);

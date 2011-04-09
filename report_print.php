@@ -14,7 +14,7 @@
 
 include '../../mainfile.php';
 include_once XOOPS_ROOT_PATH.'/class/template.php';
-$GLOBALS['xoopsOption']['template_main'] = 'gwreports_reportprint.html.html';
+$GLOBALS['xoopsOption']['template_main'] = 'gwreports_reportprint.html';
 $xoopsTpl = new XoopsTpl();
 
 include ('include/common.php');

@@ -229,6 +229,16 @@ function checkParmType($parmtypes, $parameter_type)
 	return $check_parameter_type;
 }
 
+function checkReservedParmameterName($parameter_name)
+{
+// return true if parameter_name is considered reserved
+$ret=false;
+
+	if($parameter_name=='rid') $ret=true; // interferes with report viewer
+	if (substr($parameter_name,0,1)=='$') $ret=true; // all '$' names reserved for now
+	return $ret;
+}
+
 function getReportTopic($report_id) {
 // get topic associated with a report
 	global $xoopsDB;
@@ -354,6 +364,10 @@ function getReportParameters($report_id) {
 }
 
 function getParameterForm($report_id,$parameters,$editor=false) {
+global $xoopsModuleConfig;
+
+	$show_spreadsheet=$xoopsModuleConfig['show_spreadsheet'];
+	$show_print=$xoopsModuleConfig['show_print'];
 
 	$report_script='';
 	if($editor) {
@@ -413,15 +427,19 @@ if($editor) {
 	$runbutton->setExtra(' onClick=\'this.form.action = "'.$report_script.'"\' ');
 	$rpttray->addElement($runbutton);
 
-	$buttontext=_MD_GWREPORTS_REPORT_PRINT_BUTTON;
-	$printbutton = new XoopsFormButton('', 'print', $buttontext, 'submit');
-	$printbutton->setExtra(' onClick=\'this.form.action = "report_print.php"\' ');
-	$rpttray->addElement($printbutton);
+	if($show_print) {
+		$buttontext=_MD_GWREPORTS_REPORT_PRINT_BUTTON;
+		$printbutton = new XoopsFormButton('', 'print', $buttontext, 'submit');
+		$printbutton->setExtra(' onClick=\'this.form.action = "report_print.php"\' ');
+		$rpttray->addElement($printbutton);
+	}
 
-	$buttontext=_MD_GWREPORTS_REPORT_SPREADSHEET_BUTTON;
-	$ssbutton = new XoopsFormButton('', 'spreadsheet', $buttontext, 'submit');
-	$ssbutton->setExtra(' onClick=\'this.form.action = "report_xls.php"\' ');
-	$rpttray->addElement($ssbutton);
+	if($show_spreadsheet) {
+		$buttontext=_MD_GWREPORTS_REPORT_SPREADSHEET_BUTTON;
+		$ssbutton = new XoopsFormButton('', 'spreadsheet', $buttontext, 'submit');
+		$ssbutton->setExtra(' onClick=\'this.form.action = "report_xls.php"\' ');
+		$rpttray->addElement($ssbutton);
+	}
 
 	$form->addElement($rpttray);
 }

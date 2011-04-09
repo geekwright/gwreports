@@ -11,13 +11,19 @@ define("_MI_GWREPORTS_DESC", "geekwright Reports");
 define("_MI_GWREPORTS_INDEX_TEXT", "Index Text");
 define("_MI_GWREPORTS_INDEX_TEXT_DSC", "Message to display on index page.");
 define("_MI_GWREPORTS_SHOW_BREADCRUMBS", "Show Breadcrumbs");
-define("_MI_GWREPORTS_SHOW_BREADCRUMBS_DSC", "Display breadcrumbs in topic and report pages.");
+define("_MI_GWREPORTS_SHOW_BREADCRUMBS_DSC", "Display breadcrumbs in topic and report pages?");
+define("_MI_GWREPORTS_SHOW_SPREADSHEET", "Show Spreadsheet Option");
+define("_MI_GWREPORTS_SHOW_SPREADSHEET_DSC", "Display spreadsheet option in report viewer?");
+define("_MI_GWREPORTS_SHOW_PRINT", "Show Print Option");
+define("_MI_GWREPORTS_SHOW_PRINT_DSC", "Display print option in report viewer?");
 
 // Blocks
 define("_MI_GWREPORTS_BLOCK_TOPIC", "Topic Menu");
 define("_MI_GWREPORTS_BLOCK_TOPIC_DESC", "Display reports for a single topic in a block.");
 define("_MI_GWREPORTS_BLOCK_QUICK_REPORT", "Quick Report");
 define("_MI_GWREPORTS_BLOCK_QUICK_REPORT_DESC", "Display form to run a single report in a block.");
+define("_MI_GWREPORTS_BLOCK_REPORT", "Report in a Block");
+define("_MI_GWREPORTS_BLOCK_REPORT_DESC", "Display a (small) report in a block.");
 
 // Admin Menu
 define("_MI_GWREPORTS_ADMENU", "gwReports Menu");

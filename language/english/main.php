@@ -40,6 +40,7 @@ define('_MD_GWREPORTS_PARAMETER_UPD_ERR','Could not update Parameter.');
 define('_MD_GWREPORTS_PARAMETER_NOTFOUND','Parameter does not exist.');
 define('_MD_GWREPORTS_PARAMETER_DUPLICATE','A parameter with this name already exists.');
 define('_MD_GWREPORTS_PARAMETER_DELETED','Parameter deleted.');
+define('_MD_GWREPORTS_PARAMETER_RESERVED','Parameter name is reserved and cannot be used here.');
 
 define('_MD_GWREPORTS_COLUMN_ADD_OK','Column format added.');
 define('_MD_GWREPORTS_COLUMN_ADD_ERR','Could not add column format.');

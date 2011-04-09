@@ -14,13 +14,14 @@
 if (!defined("XOOPS_ROOT_PATH")) die("Root path not defined");
 
 $modversion['name'] = _MI_GWREPORTS_NAME;
-$modversion['version'] = '0.1';
+$modversion['version'] = '0.2';
 $modversion['description'] = _MI_GWREPORTS_DESC;
 $modversion['credits'] = "geekwight, LLC";
 $modversion['help'] = "";
 $modversion['license'] = "GPL V2";
 $modversion['official'] = 0;
-$modversion['image'] = "images/icon_big.png";
+if (defined("ICMS_ROOT_PATH")) $modversion['image'] = "images/icon_big.png";
+else $modversion['image'] = "images/icon.png";
 $modversion['dirname'] = basename( dirname( __FILE__ ) ) ;
 
 // Admin things
@@ -60,6 +61,24 @@ $modversion['config'][] = array(
 	'default'		=> '1' ,
 	'options'		=> array()
 ) ;
+$modversion['config'][] = array(
+	'name'			=> 'show_spreadsheet' ,
+	'title'			=> '_MI_GWREPORTS_SHOW_SPREADSHEET' ,
+	'description'	=> '_MI_GWREPORTS_SHOW_SPREADSHEET_DSC' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> '1' ,
+	'options'		=> array()
+) ;
+$modversion['config'][] = array(
+	'name'			=> 'show_print' ,
+	'title'			=> '_MI_GWREPORTS_SHOW_PRINT' ,
+	'description'	=> '_MI_GWREPORTS_SHOW_PRINT_DSC' ,
+	'formtype'		=> 'yesno' ,
+	'valuetype'		=> 'int' ,
+	'default'		=> '1' ,
+	'options'		=> array()
+) ;
 
 // Database
 $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
@@ -92,6 +111,15 @@ $modversion['blocks'][] = array(
   'edit_func' => 'b_gwreports_block_quick_report_edit',
   'options' => 'options',
   'template' => 'gwreports_block_quick_report.html');
+
+$modversion['blocks'][] = array(
+  'file' => 'blocks.php',
+  'name' => _MI_GWREPORTS_BLOCK_REPORT,
+  'description' => _MI_GWREPORTS_BLOCK_REPORT_DESC,
+  'show_func' => 'b_gwreports_block_report_show',
+  'edit_func' => 'b_gwreports_block_report_edit',
+  'options' => 'options',
+  'template' => 'gwreports_block_report.html');
 
 // Templates
 $modversion['templates'][1] = array(
