@@ -63,9 +63,10 @@ echo '</td></tr>';
 echo "</table>";
 
 echo "<table width='100%' border='0' cellspacing='1' class='outer'>";
-echo '<tr><th colspan="3" align="center">'._AD_GWREPORTS_AD_REPORT_LISTNAME.'</th></tr>';
+echo '<tr><th colspan="4" align="center">'._AD_GWREPORTS_AD_REPORT_LISTNAME.'</th></tr>';
 echo '<tr><th>'._AD_GWREPORTS_AD_REPORT_ID."</th><th>"._AD_GWREPORTS_AD_REPORT_NAME.'</th>';
-echo '<th>'._AD_GWREPORTS_AD_REPORT_ACTIVE.'</tr>';
+echo '<th>'._AD_GWREPORTS_AD_REPORT_ACTIVE.'</th>';
+echo '<th>'._AD_GWREPORTS_AD_REPORT_OPTIONS.'</th></tr>';
 
 $sql="SELECT report_id, report_name, report_active FROM ".$xoopsDB->prefix('gwreports_report');
 $sql.=" WHERE report_name like $sl_report_name_like ";
@@ -82,7 +83,9 @@ if ($result) {
 		echo '<tr cellspacing="2" cellpadding="2" '.$tclass.'>';
 		echo '<td>'.$myrow['report_id'].'</td>';
 		echo '<td><a href="../editreport.php?rid='.$myrow['report_id'].'"">'.$myrow['report_name'].'</a></td>';
-		echo '<td>'.($myrow['report_active'] ? _YES : _NO) .'</td></tr>';
+		echo '<td>'.($myrow['report_active'] ? _YES : _NO) .'</td>';
+		echo '<td><a href="export.php?rid='.$myrow['report_id'].'"">'._AD_GWREPORTS_AD_REPORT_EXPORT.'</a></td>';
+		echo '</tr>';
 	}
 }
 if($cnt==0) echo '<tr><td colspan="3" align="center">'._AD_GWREPORTS_AD_REPORT_LISTEMPTY.'</td></tr>';
@@ -101,9 +104,8 @@ if ($total > $limit) {
 $dirname=$xoopsModule->getInfo('dirname');
 $body='';
 $body.='<br /><a href="'.XOOPS_URL.'/modules/'.$dirname.'/newreport.php">'._AD_GWREPORTS_ADMIN_REPORT_ADD.'</a>';
-$body.=' | <a href="'.XOOPS_URL.'/modules/'.$dirname.'/newtopic.php">'._AD_GWREPORTS_ADMIN_TOPIC_ADD.'</a>';
-
-echo $body;
+$body.=' | <a href="import.php">'._AD_GWREPORTS_AD_REPORT_IMPORT.'</a>';
+$body.=' | <a href="'.XOOPS_URL.'/modules/'.$dirname.'/newtopic.php">'._AD_GWREPORTS_ADMIN_TOPIC_ADD.'</a>';echo $body;
 
 xoops_cp_footer();
 ?>

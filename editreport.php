@@ -97,9 +97,8 @@ if ($op!='display') {
 }
 
 if($op=='update') {
-	$myts = myTextSanitizer::getInstance();
-	$sl_report_name=$myts->addslashes($report_name);
-	$sl_report_description=$myts->addslashes($report_description);
+	$sl_report_name=dbescape($report_name);
+	$sl_report_description=dbescape($report_description);
 
 	$dberr=false;
 	$dbmsg='';
@@ -109,7 +108,6 @@ if($op=='update') {
 	$sql.=" , report_description  =  '$sl_report_description' ";
 	$sql.=" , report_active  =  $report_active ";
 	$sql.=" WHERE report_id = $report_id ";
-	$result = $xoopsDB->queryF($sql);
 
 	$result = $xoopsDB->queryF($sql);
 	if (!$result) {

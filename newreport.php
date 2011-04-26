@@ -71,13 +71,12 @@ if ($op!='display') {
 }
 
 if($op=='add') {
-	$myts = myTextSanitizer::getInstance();
-	$sl_report_name=$myts->addslashes($report_name);
-	$sl_report_description=$myts->addslashes($report_description);
+	$sl_report_name=dbescape($report_name);
+	$sl_report_description=dbescape($report_description);
 
-	$sl_section_name=$myts->addslashes($section_name);
-	$sl_section_description=$myts->addslashes($section_description);
-	$sl_section_query=$myts->addslashes($section_query);
+	$sl_section_name=dbescape($section_name);
+	$sl_section_description=dbescape($section_description);
+	$sl_section_query=dbescape($section_query);
 
 	$dberr=false;
 	$dbmsg='';

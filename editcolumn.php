@@ -111,12 +111,11 @@ if ($op!='display') {
 }
 
 if($op=='update') {
-	$myts = myTextSanitizer::getInstance();
-//	$sl_column_name=$myts->addslashes($column_name);
-	$sl_column_title=$myts->addslashes($column_title);
-	$sl_column_format=$myts->addslashes($column_format);
-	$sl_column_style=$myts->addslashes($column_style);
-	$sl_column_extended_format=$myts->addslashes($column_extended_format);
+
+	$sl_column_title=dbescape($column_title);
+	$sl_column_format=dbescape($column_format);
+	$sl_column_style=dbescape($column_style);
+	$sl_column_extended_format=dbescape($column_extended_format);
 
 	$dberr=false;
 	$dbmsg='';
@@ -227,6 +226,8 @@ $body='';
 $body.='<br /><a href="admin/index.php">'._MD_GWREPORTS_ADMIN_MENU.'</a>';
 $body.=' | <a href="admin/reports.php">'._MD_GWREPORTS_ADMIN_REPORT.'</a>';
 $body.=' | <a href="admin/topics.php">'._MD_GWREPORTS_ADMIN_TOPIC.'</a>';
+$body.=" | <a href=\"editreport.php?rid=$report_id\">"._MD_GWREPORTS_EDITREPORT_FORM.'</a>';
+$body.=" | <a href=\"editsection.php?sid=$section_id\">"._MD_GWREPORTS_EDITSECTION_FORM.'</a>';
 
 //$debug='<pre>$_POST='.print_r($_POST,true).'</pre>';
 //$debug.='<pre>$_GET='.print_r($_GET,true).'</pre>';

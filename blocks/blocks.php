@@ -429,7 +429,7 @@ global $rowheaders;
 	return $cnt;
 }
 
-//supporting functions - from include_common.php renamed to block namespace
+//supporting functions - from include/common.php renamed to block namespace
 function b_gwreports_getReportSections($report_id) {
 
 	global $xoopsDB;
@@ -481,6 +481,10 @@ function b_gwreports_getColumns($section_id) {
 		}
 	}
 	return $columns;
+}
+
+function b_gwreports_dbescape($string) {
+	return mysql_real_escape_string($string); 
 }
 
 // show report block
@@ -546,7 +550,9 @@ if ($rid) { // b_gwreports_
 				if($parm_value) $parm_value='1'; else $parm_value='0';
 		        break;
 			default: // text, liketext, date
-				$parm_value=substr($parm_value,0,$parm_length);
+//				$parm_value=clipstring($parm_value,$parm_length);
+				if ( function_exists('mb_substr') ) $parm_value=mb_substr($parm_value, 0, $parm_length, XOOPS_DB_CHARSET);
+				else $parm_value=substr($parm_value, 0, $parm_length);
 		        break;
 		}
 		$parameters[$v['parameter_id']]['value']=$parm_value;
@@ -554,7 +560,6 @@ if ($rid) { // b_gwreports_
 
 	$parmtags=array();
 	$parmsubs=array();
-	$myts = myTextSanitizer::getInstance();
 
 	$pc=0;
 	$parmtags[$pc]='{$xpfx}';
@@ -567,7 +572,7 @@ if ($rid) { // b_gwreports_
 		// 	'text','liketext','date','datetime','integer','yesno'
 		switch ($parm_type) {
 			case "liketext":
-				$parmsubs[$pc]=$myts->addslashes('%'.$v['value'].'%');
+				$parmsubs[$pc]=b_gwreports_dbescape('%'.$v['value'].'%');
 		        break;
 			case "date":
 				$parmsubs[$pc]=strtotime($v['value']);
@@ -579,7 +584,7 @@ if ($rid) { // b_gwreports_
 				$parmsubs[$pc]=intval($v['value']);
 		        break;
 			default:
-				$parmsubs[$pc]=$myts->addslashes($v['value']);
+				$parmsubs[$pc]=b_gwreports_dbescape($v['value']);
 		        break;
 		}
 	}

@@ -102,10 +102,9 @@ if ($op!='display') {
 }
 
 if($op=='update') {
-	$myts = myTextSanitizer::getInstance();
-	$sl_section_name=$myts->addslashes($section_name);
-	$sl_section_description=$myts->addslashes($section_description);
-	$sl_section_query=$myts->addslashes($section_query);
+	$sl_section_name=dbescape($section_name);
+	$sl_section_description=dbescape($section_description);
+	$sl_section_query=dbescape($section_query);
 
 	$dberr=false;
 	$dbmsg='';

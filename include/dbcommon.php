@@ -43,19 +43,28 @@ global $xoopsDB;
 }
 
 function cleaner($string,$htmlok=false) {
-	if (get_magic_quotes_gpc()) $string = stripcslashes($string); 
+	if (get_magic_quotes_gpc()) $string = stripslashes($string); 
 	$string=html_entity_decode($string);
 	if(!$htmlok) $string=strip_tags($string);
 	$string=trim($string);
-	$string=stripslashes($string);
 	return $string;
 }
 
 function cleaneryn($string) {
 	$r=intval($string);
-	if($r) $r=1;
-	else $r=0;
+	$r=($r ? 1 : 0);
 	return $r;
+}
+
+function dbescape($string) {
+	return mysql_real_escape_string($string); 
+}
+
+function clipstring($string,$length) {
+	// encoding parameter may have naming issues in some cases but seems to work for utf-8
+	if ( function_exists('mb_substr') ) $ret=mb_substr ($string, 0, $length,XOOPS_DB_CHARSET);
+	else $ret=substr($string, 0, $length);
+	return $ret; 
 }
 
 function getTcpdfPath() {

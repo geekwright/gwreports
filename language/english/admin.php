@@ -24,6 +24,17 @@ define('_AD_GWREPORTS_AD_REPORT_LISTEMPTY', 'No matching reports');
 define('_AD_GWREPORTS_AD_REPORT_ID', 'ID');
 define('_AD_GWREPORTS_AD_REPORT_NAME', 'Report Name');
 define('_AD_GWREPORTS_AD_REPORT_ACTIVE', 'Active');
+define('_AD_GWREPORTS_AD_REPORT_OPTIONS', 'Options');
+define('_AD_GWREPORTS_AD_REPORT_EXPORT', 'Export');
+define('_AD_GWREPORTS_AD_REPORT_IMPORT', 'Import');
+
+// Admin Report Import
+define('_AD_GWREPORTS_AD_IMPORT_FORMNAME', 'Import Report Definition');
+define('_AD_GWREPORTS_AD_IMPORT_FILENAME', 'Report File to Import');
+define('_AD_GWREPORTS_AD_IMPORT_BUTTON', 'Import');
+define('_AD_GWREPORTS_AD_IMPORT_ERROR', 'Import Failed');
+define('_AD_GWREPORTS_AD_IMPORT_BADFILE', 'Not a report export file');
+define('_AD_GWREPORTS_AD_IMPORT_OK', 'Report imported');
 
 // Admin Topic List
 define('_AD_GWREPORTS_AD_TOPIC_FORMNAME', 'Select Topic');

@@ -71,9 +71,8 @@ if ($op!='display') {
 }
 
 if($op=='update') {
-	$myts = myTextSanitizer::getInstance();
-	$sl_topic_name=$myts->addslashes($topic_name);
-	$sl_topic_description=$myts->addslashes($topic_description);
+	$sl_topic_name=dbescape($topic_name);
+	$sl_topic_description=dbescape($topic_description);
 
 	$dberr=false;
 	$dbmsg='';

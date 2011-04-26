@@ -81,11 +81,10 @@ if($op=='add') {
 }
 
 if($op=='add') {
-	$myts = myTextSanitizer::getInstance();
-	$sl_parameter_name=$myts->addslashes($parameter_name);
-	$sl_parameter_description=$myts->addslashes($parameter_description);
-	$sl_parameter_title=$myts->addslashes($parameter_title);
-	$sl_parameter_default=$myts->addslashes($parameter_default);
+	$sl_parameter_name=dbescape($parameter_name);
+	$sl_parameter_description=dbescape($parameter_description);
+	$sl_parameter_title=dbescape($parameter_title);
+	$sl_parameter_default=dbescape($parameter_default);
 
 	$dberr=false;
 	$dbmsg='';

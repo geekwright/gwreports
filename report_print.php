@@ -299,7 +299,7 @@ if($show_breadcrumbs) {
 				if($parm_value) $parm_value='1'; else $parm_value='0';
 		        break;
 			default: // text, liketext, date
-				$parm_value=substr($parm_value,0,$parm_length);
+				$parm_value=clipstring($parm_value,$parm_length);
 		        break;
 		}
 		$parameters[$v['parameter_id']]['value']=$parm_value;
@@ -324,7 +324,6 @@ if ($op=='run') {
 
 	$parmtags=array();
 	$parmsubs=array();
-	$myts = myTextSanitizer::getInstance();
 
 	$pc=0;
 	$parmtags[$pc]='{$xpfx}';
@@ -337,7 +336,7 @@ if ($op=='run') {
 		// 	'text','liketext','date','datetime','integer','yesno'
 		switch ($parm_type) {
 			case "liketext":
-				$parmsubs[$pc]=$myts->addslashes('%'.$v['value'].'%');
+				$parmsubs[$pc]=dbescape('%'.$v['value'].'%');
 		        break;
 			case "date":
 				$parmsubs[$pc]=strtotime($v['value']);
@@ -349,7 +348,7 @@ if ($op=='run') {
 				$parmsubs[$pc]=intval($v['value']);
 		        break;
 			default:
-				$parmsubs[$pc]=$myts->addslashes($v['value']);
+				$parmsubs[$pc]=dbescape($v['value']);
 		        break;
 		}
 	}

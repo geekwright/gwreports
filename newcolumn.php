@@ -85,12 +85,11 @@ if ($op!='display') {
 }
 
 if($op=='add') {
-	$myts = myTextSanitizer::getInstance();
-	$sl_column_name=$myts->addslashes($column_name);
-	$sl_column_title=$myts->addslashes($column_title);
-	$sl_column_format=$myts->addslashes($column_format);
-	$sl_column_style=$myts->addslashes($column_style);
-	$sl_column_extended_format=$myts->addslashes($column_extended_format);
+	$sl_column_name=dbescape($column_name);
+	$sl_column_title=dbescape($column_title);
+	$sl_column_format=dbescape($column_format);
+	$sl_column_style=dbescape($column_style);
+	$sl_column_extended_format=dbescape($column_extended_format);
 
 	$dberr=false;
 	$dbmsg='';
