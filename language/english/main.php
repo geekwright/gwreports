@@ -50,7 +50,7 @@ define('_MD_GWREPORTS_COLUMN_NOTFOUND','Column format does not exist.');
 define('_MD_GWREPORTS_COLUMN_DUPLICATE','A column format with this name already exists.');
 define('_MD_GWREPORTS_COLUMN_DELETED','Column format deleted.');
 
-define('_MD_GWREPORTS_NEED_TCPDF','TCPDF is needed for this option.');
+define('_MD_GWREPORTS_RUNTIME_SQL_ERROR','An error (%s) has occurred while processing this report.');
 
 // newreport
 define('_MD_GWREPORTS_NEWREPORT_FORM','Add New Report');

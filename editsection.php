@@ -85,7 +85,7 @@ $report_name='';
 
 	if(isset($_POST['section_name'])) $section_name = cleaner($_POST['section_name']);
 	if(isset($_POST['section_description'])) $section_description = cleaner($_POST['section_description']);
-	if(isset($_POST['section_query'])) $section_query = cleaner($_POST['section_query']);
+	if(isset($_POST['section_query'])) $section_query = cleaner($_POST['section_query'],true);
 	if(isset($_POST['section_multirow'])) $section_multirow = cleaneryn($_POST['section_multirow']);
 	if(isset($_POST['section_showtitle'])) $section_showtitle = cleaneryn($_POST['section_showtitle']);
 	if(isset($_POST['section_skipempty'])) $section_skipempty = cleaneryn($_POST['section_skipempty']);

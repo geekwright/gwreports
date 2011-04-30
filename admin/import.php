@@ -121,6 +121,10 @@ adminmenu(3);
 									$dbmsg=formatDBError();
 								}
 								break;
+							default:
+								$dberr=true;
+								$dbmsg=_AD_GWREPORTS_AD_IMPORT_BADFILE;
+								break;
 						}
 					}
 

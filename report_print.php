@@ -84,7 +84,7 @@ function emitColumn($column_name, &$columns, $row, $breaktriggered, $rowheaders)
 
 		if($columns[$column_name]['column_hide']) return '';
 	}
-	$r="<td$css>".strip_tags($r).'</td>';
+	$r="<td$css>$r</td>";
 	return $r;
 }
 
@@ -450,7 +450,7 @@ if ($op=='run') {
 				}
 			}
 		}
-		if($dbmsg!='') $body.='<br /><em>'.$dbmsg.'</em><br />';
+		if($dbmsg!='') $body.='<br /><em>'.sprintf(_MD_GWREPORTS_RUNTIME_SQL_ERROR,$dbmsg).'</em><br />';
 	} // foreach ($sections as $s)
 }
 

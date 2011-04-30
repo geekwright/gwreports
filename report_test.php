@@ -433,6 +433,7 @@ if ($op=='run') {
 				}
 			}
 		}
+//		if($dbmsg!='') $body.='<br /><em>'.sprintf(_MD_GWREPORTS_RUNTIME_SQL_ERROR,$dbmsg).'</em><br />';
 		if($dbmsg!='') $body.='<br /><em>'.$dbmsg.'</em><br />';
 	} // foreach ($sections as $s)
 }

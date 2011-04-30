@@ -36,16 +36,21 @@ global $xoopsDB;
 }
 
 function formatDBError() {
-global $xoopsDB;
+global $xoopsDB, $xoopsUser;
 
-	$msg=$xoopsDB->errno() . ' ' . $xoopsDB->error();
+	$msg=$xoopsDB->errno();
+	if(($xoopsUser && ($xoopsUser->isAdmin()))) {
+		$msg=$xoopsDB->errno() . ' ' . $xoopsDB->error();
+	} 
 	return($msg);
 }
 
 function cleaner($string,$htmlok=false) {
 	if (get_magic_quotes_gpc()) $string = stripslashes($string); 
-	$string=html_entity_decode($string);
-	if(!$htmlok) $string=strip_tags($string);
+	if(!$htmlok) {
+		$string=html_entity_decode($string);
+		$string=strip_tags($string);
+	}
 	$string=trim($string);
 	return $string;
 }
