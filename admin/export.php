@@ -119,6 +119,7 @@ if(isset($_POST['rid'])) $report_id = intval($_POST['rid']);
 				echo $parm['parameter_required'].$eol;
 				echo $parm['parameter_length'].$eol;
 				echo $parm['parameter_type'].$eol;
+				echo $parm['parameter_decimals'].$eol;
 			}
 			$sections=getReportSections($report_id);
 			foreach ($sections as $sec) {

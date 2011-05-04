@@ -66,10 +66,11 @@ adminmenu(3);
 								$parameter_required = intval($import[$line++]);
 								$parameter_length = intval($import[$line++]);
 								$parameter_type = dbescape($import[$line++]);
+								$parameter_decimals = intval($import[$line++]);
 
 								$sql ='INSERT INTO '.$xoopsDB->prefix('gwreports_parameter');
-								$sql.=' (report, parameter_name, parameter_title, parameter_description, parameter_order, parameter_default, parameter_required, parameter_length, parameter_type) ';
-								$sql.=" VALUES ( $report_id, '$parameter_name', '$parameter_title', '$parameter_description', $parameter_order, '$parameter_default', $parameter_required, $parameter_length, '$parameter_type') ";
+								$sql.=' (report, parameter_name, parameter_title, parameter_description, parameter_order, parameter_default, parameter_required, parameter_length, parameter_type, parameter_decimals) ';
+								$sql.=" VALUES ( $report_id, '$parameter_name', '$parameter_title', '$parameter_description', $parameter_order, '$parameter_default', $parameter_required, $parameter_length, '$parameter_type', $parameter_decimals) ";
 
 								$result = $xoopsDB->queryF($sql);
 								if (!$result) {
