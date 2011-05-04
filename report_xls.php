@@ -71,6 +71,8 @@ function emitColumn($column_name, &$columns, $row, $breaktriggered, $rowheaders)
 //			$columns[$column_name]['sum_column_break'] += $r;
 //		}
 
+		$r = htmlspecialchars($r);
+
 		if($columns[$column_name]['column_is_unixtime']) {
 			if($columns[$column_name]['column_format']!='') {
 				$r=date($columns[$column_name]['column_format'],$r);
@@ -253,7 +255,7 @@ $report_topic=0;
 // get data from table
 
 	$sql='SELECT * FROM '.$xoopsDB->prefix('gwreports_report');
-	$sql.=" WHERE report_id = $report_id ";
+	$sql.=" WHERE report_id = $report_id and report_active = 1 ";
 
 	$cnt=0;
 	$result = $xoopsDB->query($sql);
@@ -270,7 +272,9 @@ $report_topic=0;
 			$report_topic=getReportTopic($report_id);
 			$sections=getReportSections($report_id);
 //			$xoopsTpl->assign('report_sections', $sections);
-
+			$userGroups=getUserGroups();
+			$user_access = array_intersect($access_groups, $userGroups);
+			if(count($user_access)<1) $err_message = _MD_GWREPORTS_NOT_AUTHORIZED;
 		}
 		else {
  			$err_message = _MD_GWREPORTS_REPORT_NOTFOUND;
@@ -280,6 +284,9 @@ $report_topic=0;
 	else {
  		$err_message = _MD_GWREPORTS_REPORT_NOTFOUND;
 		$report_id=0;
+	}
+	if(isset($err_message)) {
+			redirect_header('index.php', 3, $err_message);
 	}
 
 // get parameters
@@ -345,6 +352,11 @@ if ($op=='run') {
 		        break;
 			case "integer":
 				$parmsubs[$pc]=intval($v['value']);
+		        break;
+			case "decimal":
+				$dp=$v['parameter_decimals'];
+				$dp=sprintf('%01d',$dp);
+				$parmsubs[$pc]=sprintf('%01.'.$dp.'f',round($v['value'],$dp));
 		        break;
 			case "yesno":
 				$parmsubs[$pc]=intval($v['value']);

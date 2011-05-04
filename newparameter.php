@@ -51,6 +51,7 @@ $parameter_default='';
 $parameter_required=1;
 $parameter_length=0;
 $parameter_type='text';
+$parameter_decimals=0;
 
 	if(isset($_POST['parameter_name'])) $parameter_name = str_replace(' ', '_',cleaner($_POST['parameter_name']));
 	if(isset($_POST['parameter_description'])) $parameter_description = cleaner($_POST['parameter_description']);
@@ -61,8 +62,9 @@ $parameter_type='text';
 	$parameter_type=checkParmType($parmtypes, $parameter_type);
 
 	if(isset($_POST['parameter_required'])) $parameter_required = cleaneryn($_POST['parameter_required']);
-	if(isset($_POST['parameter_length'])) $parameter_length = intval($_POST['parameter_length']);
+	if(isset($_POST['parameter_length'])) $parameter_length = abs(intval($_POST['parameter_length']));
 	if($parameter_length==0) $parameter_length=20;
+	if(isset($_POST['parameter_decimals'])) $parameter_decimals = abs(intval($_POST['parameter_decimals']));
 
 if ($op!='display') {
 	$check=$GLOBALS['xoopsSecurity']->check();
@@ -90,8 +92,8 @@ if($op=='add') {
 	$dbmsg='';
 
 	$sql ='INSERT INTO '.$xoopsDB->prefix('gwreports_parameter');
-	$sql.=' (report, parameter_name, parameter_description, parameter_title, parameter_default, parameter_required, parameter_length, parameter_type) ';
-	$sql.=" VALUES ( $report_id, '$sl_parameter_name', '$sl_parameter_description', '$sl_parameter_title', '$sl_parameter_default', $parameter_required, $parameter_length, '$parameter_type') ";
+	$sql.=' (report, parameter_name, parameter_description, parameter_title, parameter_default, parameter_required, parameter_length, parameter_type, parameter_decimals) ';
+	$sql.=" VALUES ( $report_id, '$sl_parameter_name', '$sl_parameter_description', '$sl_parameter_title', '$sl_parameter_default', $parameter_required, $parameter_length, '$parameter_type', $parameter_decimals) ";
 
 	$result = $xoopsDB->queryF($sql);
 	if (!$result) {
@@ -129,6 +131,9 @@ $body='';
 
 	$caption = _MD_GWREPORTS_PARAMETER_LENGTH;
 	$form->addElement(new XoopsFormText($caption, 'parameter_length', 8 , 8, intval($parameter_length)),true);
+
+	$caption = _MD_GWREPORTS_PARAMETER_DECIMALS;
+	$form->addElement(new XoopsFormText($caption, 'parameter_decimals', 3 , 3, intval($parameter_decimals)),true);
 
 	$caption = _MD_GWREPORTS_PARAMETER_REQUIRED;
 	$form->addElement(new XoopsFormRadioYN($caption, 'parameter_required', $parameter_required),true);

@@ -43,6 +43,7 @@ $parameter_default='';
 $parameter_required=1;
 $parameter_length=0;
 $parameter_type='text';
+$parameter_decimals=0;
 $report_id=0;
 $report_name='';
 
@@ -62,6 +63,7 @@ $report_name='';
 			$parameter_required=$myrow['parameter_required'];
 			$parameter_length=$myrow['parameter_length'];
 			$parameter_type=$myrow['parameter_type'];
+			$parameter_decimals=$myrow['parameter_decimals'];
 			$report_id=$myrow['report'];
 			++$cnt;
 		}
@@ -91,8 +93,9 @@ $report_name='';
 	$parameter_type=checkParmType($parmtypes, $parameter_type);
 
 	if(isset($_POST['parameter_required'])) $parameter_required = cleaneryn($_POST['parameter_required']);
-	if(isset($_POST['parameter_length'])) $parameter_length = intval($_POST['parameter_length']);
+	if(isset($_POST['parameter_length'])) $parameter_length = abs(intval($_POST['parameter_length']));
 	if($parameter_length==0) $parameter_length=20;
+	if(isset($_POST['parameter_decimals'])) $parameter_decimals = abs(intval($_POST['parameter_decimals']));
 
 if ($op!='display') {
 	$check=$GLOBALS['xoopsSecurity']->check();
@@ -127,6 +130,7 @@ if($op=='update') {
 	$sql.=" , parameter_required  =  $parameter_required ";
 	$sql.=" , parameter_length  =  $parameter_length ";
 	$sql.=" , parameter_type  =  '$parameter_type' ";
+	$sql.=" , parameter_decimals  =  $parameter_decimals ";
 	$sql.=" WHERE parameter_id = $parameter_id ";
 	$result = $xoopsDB->queryF($sql);
 	if (!$result) {
@@ -181,6 +185,9 @@ $body='';
 
 	$caption = _MD_GWREPORTS_PARAMETER_LENGTH;
 	$form->addElement(new XoopsFormText($caption, 'parameter_length', 8 , 8, intval($parameter_length)),true);
+
+	$caption = _MD_GWREPORTS_PARAMETER_DECIMALS;
+	$form->addElement(new XoopsFormText($caption, 'parameter_decimals', 3 , 3, intval($parameter_decimals)),true);
 
 	$caption = _MD_GWREPORTS_PARAMETER_REQUIRED;
 	$form->addElement(new XoopsFormRadioYN($caption, 'parameter_required', $parameter_required),true);

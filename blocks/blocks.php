@@ -286,6 +286,8 @@ function b_gwreports_emitColumn($column_name, &$columns, $row, $breaktriggered, 
 			$columns[$column_name]['sum_column_break'] += $r;
 		}
 
+		$r = htmlspecialchars($r);
+
 		if($columns[$column_name]['column_is_unixtime']) {
 			if($columns[$column_name]['column_format']!='') {
 				$r=date($columns[$column_name]['column_format'],$r);
@@ -579,6 +581,11 @@ if ($rid) { // b_gwreports_
 		        break;
 			case "integer":
 				$parmsubs[$pc]=intval($v['value']);
+		        break;
+			case "decimal":
+				$dp=$v['parameter_decimals'];
+				$dp=sprintf('%01d',$dp);
+				$parmsubs[$pc]=sprintf('%01.'.$dp.'f',round($v['value'],$dp));
 		        break;
 			case "yesno":
 				$parmsubs[$pc]=intval($v['value']);

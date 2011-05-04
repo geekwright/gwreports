@@ -7,7 +7,7 @@ define('_MD_GWREPORTS_TITLE_SEP',' : ');
 // error messages
 define('_MD_GWREPORTS_MSG_BAD_TOKEN','Expired or invalid security token in request.');
 define('_MD_GWREPORTS_MISSING_PARAMETER','A required parameter is missing.');
-
+define('_MD_GWREPORTS_NOT_AUTHORIZED','Not authorized.');
 
 define('_MD_GWREPORTS_TOPIC_ADD_OK','Topic added.');
 define('_MD_GWREPORTS_TOPIC_ADD_ERR','Could not add Topic.');
@@ -175,6 +175,7 @@ define('_MD_GWREPORTS_PARAMETER_DEFAULT','Default Value');
 define('_MD_GWREPORTS_PARAMETER_TYPE','Parameter Type');
 define('_MD_GWREPORTS_PARAMETER_REQUIRED','Required');
 define('_MD_GWREPORTS_PARAMETER_LENGTH','Field Length');
+define('_MD_GWREPORTS_PARAMETER_DECIMALS','Number of Decimal Places');
 define('_MD_GWREPORTS_PARAMETER_SQL_FMT','To reference in SQL');
 
 define('_MD_GWREPORTS_COLUMN_NAME','Column Name');
@@ -206,5 +207,6 @@ define('_MD_GWREPORTS_PARMTYPE_LIKETEXT','Like Text');
 define('_MD_GWREPORTS_PARMTYPE_DATE','Date');
 //define('_MD_GWREPORTS_PARMTYPE_DATETIME','Date Time');
 define('_MD_GWREPORTS_PARMTYPE_INTEGER','Integer');
+define('_MD_GWREPORTS_PARMTYPE_DECIMAL','Decimal');
 define('_MD_GWREPORTS_PARMTYPE_YESNO','Yes/No');
 ?>

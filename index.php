@@ -34,7 +34,7 @@ if($topic_id==0) {
 	$modtitle=$xoopsModule->getVar('name');
 	setPageTitle($modtitle);
 	$index_description=$xoopsModuleConfig['index_text'];
-	if($index_description!='') $xoopsTpl->assign('page_message', $index_description);
+	if($index_description!='') $xoopsTpl->assign('page_message', nl2br(htmlspecialchars($index_description)));
 //	$topics=getTopicListByGroup($userGroups);
 	$xoopsTpl->assign('topics', $topics);
 //	$debug='<pre>$topics='.print_r($topics,true).'</pre>';
@@ -42,7 +42,7 @@ if($topic_id==0) {
 else {
 	$topic=getTopic($topic_id);
 	setPageTitle($topic['topic_name']);
-	if($topic['topic_description']!='') $xoopsTpl->assign('page_message', $topic['topic_description']);
+	if($topic['topic_description']!='') $xoopsTpl->assign('page_message', nl2br(htmlspecialchars($topic['topic_description'])));
 	$reports=getReportListByGroup($topic_id, $userGroups);
 	$xoopsTpl->assign('reports', $reports);
 //	$debug='<pre>$reports='.print_r($reports,true).'</pre>';

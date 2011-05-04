@@ -29,5 +29,6 @@ define("_MI_GWREPORTS_BLOCK_REPORT_DESC", "Display a (small) report in a block."
 define("_MI_GWREPORTS_ADMENU", "gwReports Menu");
 define("_MI_GWREPORTS_AD_TOPIC", "Topics");
 define("_MI_GWREPORTS_AD_REPORT", "Reports");
+define("_MI_GWREPORTS_AD_EXPLORE", "Explore");
 
 ?>

@@ -7,6 +7,7 @@ if (!defined("XOOPS_ROOT_PATH")) die("Root path not defined");
 define("_AD_GWREPORTS_ADMENU", "gwReports Menu");
 define("_AD_GWREPORTS_AD_TOPIC", "Topics");
 define("_AD_GWREPORTS_AD_REPORT", "Reports");
+define("_AD_GWREPORTS_AD_EXPLORE", "Explore");
 define('_AD_GWREPORTS_ADMENU_ABOUT', 'About');
 define("_AD_GWREPORTS_ADMENU_PREF", "Preferences");
 define("_AD_GWREPORTS_ADMENU_GOMOD", "Go To Module");
@@ -35,6 +36,15 @@ define('_AD_GWREPORTS_AD_IMPORT_BUTTON', 'Import');
 define('_AD_GWREPORTS_AD_IMPORT_ERROR', 'Import Failed');
 define('_AD_GWREPORTS_AD_IMPORT_BADFILE', 'Not a report export file');
 define('_AD_GWREPORTS_AD_IMPORT_OK', 'Report imported');
+
+// Admin Explore
+define('_AD_GWREPORTS_AD_EXPLORE_FORMNAME', 'Explore Databases');
+define('_AD_GWREPORTS_AD_EXPLORE_DATABASE', 'Database');
+define('_AD_GWREPORTS_AD_EXPLORE_PICKDB', '(Choose a Database)');
+define('_AD_GWREPORTS_AD_EXPLORE_TABLES', 'Tables');
+define('_AD_GWREPORTS_AD_EXPLORE_QUERY', 'Generated Query');
+define('_AD_GWREPORTS_AD_EXPLORE_BUTTON', 'Draw');
+define('_AD_GWREPORTS_AD_EXPLORE_ERROR', 'Something isn\'t right here.');
 
 // Admin Topic List
 define('_AD_GWREPORTS_AD_TOPIC_FORMNAME', 'Select Topic');

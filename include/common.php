@@ -211,6 +211,7 @@ $parmtypes[]=array('parm_value'=>'liketext', 'parm_display'=> _MD_GWREPORTS_PARM
 $parmtypes[]=array('parm_value'=>'date', 'parm_display'=> _MD_GWREPORTS_PARMTYPE_DATE );
 //$parmtypes[]=array('parm_value'=>'datetime', 'parm_display'=> _MD_GWREPORTS_PARMTYPE_DATETIME );
 $parmtypes[]=array('parm_value'=>'integer', 'parm_display'=> _MD_GWREPORTS_PARMTYPE_INTEGER );
+$parmtypes[]=array('parm_value'=>'decimal', 'parm_display'=> _MD_GWREPORTS_PARMTYPE_DECIMAL );
 $parmtypes[]=array('parm_value'=>'yesno', 'parm_display'=> _MD_GWREPORTS_PARMTYPE_YESNO );
 
 	return $parmtypes;
@@ -405,7 +406,7 @@ global $xoopsModuleConfig;
 			case "datetime":
 				$element=new XoopsFormDateTime($caption, $parm_name, $parm_length, $parm_value);
 		        break;
-			default: // text, liketext, int
+			default: // text, liketext, int, decimal
 				$element=new XoopsFormText($caption, $parm_name, $parm_length, $parm_length, htmlspecialchars($parm_value, ENT_QUOTES));
 		        break;
 		}
