@@ -166,7 +166,7 @@ if ($op=='delete') {
 
 $body='';
 	$token=true;
-	$formtitle=_MD_GWREPORTS_NEWCOLUMN_FORM;
+	$formtitle=_MD_GWREPORTS_EDITCOLUMN_FORM;
 	$form = new XoopsThemeForm($formtitle, 'form1', 'editcolumn.php', 'POST', $token);
 
 	$caption = _MD_GWREPORTS_SECTION_REPORT_NAME;
