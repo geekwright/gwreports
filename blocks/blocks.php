@@ -406,7 +406,6 @@ $havesum=false;
 function b_gwreports_initializeColumns(&$columns, $row, &$rowheaders) {
 // initialize columns and return count of columns
 $cnt=0;
-global $rowheaders;
 
 	$rowheaders=array();
 

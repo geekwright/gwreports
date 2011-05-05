@@ -205,7 +205,7 @@ $havebreak=false;
 function initializeColumns(&$columns, $row, &$rowheaders) {
 // initialize columns and return count of columns
 $cnt=0;
-global $rowheaders, $xls_row;
+global $xls_row;
 
 	$rowheaders=array();
 
