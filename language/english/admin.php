@@ -4,7 +4,7 @@ if (!defined("XOOPS_ROOT_PATH")) die("Root path not defined");
 // Admin constants
 
 // Admin Menu
-define("_AD_GWREPORTS_ADMENU", "gwReports Menu");
+define("_AD_GWREPORTS_ADMENU", "gwreports Menu");
 define("_AD_GWREPORTS_AD_TOPIC", "Topics");
 define("_AD_GWREPORTS_AD_REPORT", "Reports");
 define("_AD_GWREPORTS_AD_EXPLORE", "Explore");
@@ -73,4 +73,10 @@ define('_AD_GWREPORTS_ADMIN_PARAMETER_SORT', 'Reorder Parameters');
 define('_AD_GWREPORTS_TODO_TITLE', 'Action Required');
 define('_AD_GWREPORTS_TODO_ACTION', 'Action');
 define('_AD_GWREPORTS_TODO_MESSAGE', 'Message');
+
+// limited mode messages
+define('_AD_GWREPORTS_DISABLED', 'This function is not available.');
+define('_AD_GWREPORTS_NO_IMPORT_DIR', 'The import directory does not exist.');
+define('_AD_GWREPORTS_EMPTY_IMPORT_DIR', 'The import directory is empty.');
+define('_AD_GWREPORTS_LIMITED_MODE', 'This installation is operating in limited mode.');
 ?>

@@ -23,10 +23,10 @@ function setPageTitle($title,$headingonly=false) {
 global $xoopsModule,$xoopsTpl;
 
 	$display_name = $xoopsModule -> getVar('name');
-
+	if($display_name!=$title) $display_name .= _MD_GWREPORTS_TITLE_SEP . $title;
 	if(!$headingonly) {
-		@$xoopsTpl->assign('xoops_pagetitle', $display_name . _MD_GWREPORTS_TITLE_SEP . $title); // html title
-		@$xoopsTpl->assign('icms_pagetitle',  $display_name . _MD_GWREPORTS_TITLE_SEP . $title);
+		@$xoopsTpl->assign('xoops_pagetitle', $display_name); // html title
+		@$xoopsTpl->assign('icms_pagetitle',  $display_name);
 	}
 	$xoopsTpl->assign('title',$title);	// content heading
 }

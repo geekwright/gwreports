@@ -59,6 +59,7 @@ $column_hide=0;
 $column_sum=0;
 $column_break=0;
 $column_outline=0;
+$column_apply_nl2br=0;
 $column_is_unixtime=0;
 $column_format='';
 $column_style='';
@@ -70,6 +71,7 @@ $column_extended_format='';
 	if(isset($_POST['column_sum'])) $column_sum = cleaneryn($_POST['column_sum']);
 	if(isset($_POST['column_break'])) $column_break = cleaneryn($_POST['column_break']);
 	if(isset($_POST['column_outline'])) $column_outline = cleaneryn($_POST['column_outline']);
+	if(isset($_POST['column_apply_nl2br'])) $column_apply_nl2br = cleaneryn($_POST['column_apply_nl2br']);
 	if(isset($_POST['column_is_unixtime'])) $column_is_unixtime = cleaneryn($_POST['column_is_unixtime']);
 	if(isset($_POST['column_format'])) $column_format = cleaner($_POST['column_format']);
 	if(isset($_POST['column_style'])) $column_style = cleaner($_POST['column_style']);
@@ -95,8 +97,8 @@ if($op=='add') {
 	$dbmsg='';
 
 	$sql ='INSERT INTO '.$xoopsDB->prefix('gwreports_column');
-	$sql.=' (section, column_name, column_title, column_hide, column_sum, column_break, column_outline, column_is_unixtime, column_format, column_style, column_extended_format ) ';
-	$sql.=" VALUES ($section_id, '$sl_column_name', '$sl_column_title', $column_hide, $column_sum, $column_break, $column_outline, $column_is_unixtime, '$sl_column_format', '$sl_column_style', '$sl_column_extended_format' ) ";
+	$sql.=' (section, column_name, column_title, column_hide, column_sum, column_break, column_outline, column_apply_nl2br, column_is_unixtime, column_format, column_style, column_extended_format ) ';
+	$sql.=" VALUES ($section_id, '$sl_column_name', '$sl_column_title', $column_hide, $column_sum, $column_break, $column_outline, $column_apply_nl2br, $column_is_unixtime, '$sl_column_format', '$sl_column_style', '$sl_column_extended_format' ) ";
 
 	$result = $xoopsDB->queryF($sql);
 	if (!$result) {
@@ -144,6 +146,9 @@ $body='';
 
 	$caption = _MD_GWREPORTS_COLUMN_OUTLINE;
 	$form->addElement(new XoopsFormRadioYN($caption, 'column_outline', $column_outline),false);
+
+	$caption = _MD_GWREPORTS_COLUMN_APPLY_NL2BR;
+	$form->addElement(new XoopsFormRadioYN($caption, 'column_apply_nl2br', $column_apply_nl2br),false);
 
 	$caption = _MD_GWREPORTS_COLUMN_IS_UNIXTIME;
 	$form->addElement(new XoopsFormRadioYN($caption, 'column_is_unixtime', $column_is_unixtime),false);

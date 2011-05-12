@@ -70,6 +70,7 @@ CREATE TABLE gwreports_column (
   column_sum tinyint unsigned NOT NULL default '0',
   column_break tinyint unsigned NOT NULL default '0',
   column_outline tinyint unsigned NOT NULL default '0',
+  column_apply_nl2br tinyint unsigned NOT NULL default '0',
   column_is_unixtime tinyint unsigned NOT NULL default '0',
   column_format varchar(255) NOT NULL default '',
   column_style varchar(255) NOT NULL default '',

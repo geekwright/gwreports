@@ -18,10 +18,11 @@ $adminmenu[] = array(
 	'icon'	=> 'images/icon_opt_report.png'
 ) ;
 
-$adminmenu[] = array(
-	'title'	=> _MI_GWREPORTS_AD_EXPLORE ,
-	'link'	=> 'admin/explore.php' ,
-	'icon'	=> 'images/icon_opt_explore.png'
-) ;
+//$adminmenu[] = array(
+//	'title'	=> _MI_GWREPORTS_AD_EXPLORE ,
+//	'link'	=> 'admin/explore.php' ,
+//	'icon'	=> 'images/icon_opt_explore.png'
+//) ;
+if(!defined("_MI_GWREPORTS_AD_LIMITED")) define("_MI_GWREPORTS_AD_LIMITED", "Yes");
 
 ?>

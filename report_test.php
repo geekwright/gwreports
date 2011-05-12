@@ -76,6 +76,10 @@ function emitColumn($column_name, &$columns, $row, $breaktriggered, $rowheaders)
 
 		$r = htmlspecialchars($r);
 
+		if($columns[$column_name]['column_apply_nl2br']) {
+			$r = nl2br($r);
+		}
+
 		if($columns[$column_name]['column_is_unixtime']) {
 			if($columns[$column_name]['column_format']!='') {
 				$r=date($columns[$column_name]['column_format'],$r);

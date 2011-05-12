@@ -24,6 +24,17 @@ $todocnt = 0;
 
 $op='';
 
+
+if(defined("_MI_GWREPORTS_AD_LIMITED")) {
+	$pathname=XOOPS_TRUST_PATH.'/modules/gwreports/import/';
+	if(!is_dir($pathname))  {
+		++$todocnt;
+		$todo[$todocnt]['link']='index.php';
+		$todo[$todocnt]['linktext']= 'Retry';
+		$todo[$todocnt]['msg']= _AD_GWREPORTS_NO_IMPORT_DIR;
+	}
+}
+
 // we don't have any todo checks for gwreports yet
 if(false) {
 	++$todocnt;
@@ -58,6 +69,7 @@ echo '<tr><th>'._AD_GWREPORTS_ADMENU_ABOUT.'</th></tr><tr><td width="100%" >';
 echo '<center><br /><b>'. _MI_GWREPORTS_DESC . '</b></center><br />';
 echo '<center>Brought to you by <a href="http://www.geekwright.com/" target="_blank">geekwright, LLC</a></center><br />';
 echo '</td></tr>';
+if(defined("_MI_GWREPORTS_AD_LIMITED")) echo '<tr><td class="odd"><center>'._AD_GWREPORTS_LIMITED_MODE.'</center</td></tr>';
 echo '</table>';
 
 

@@ -67,7 +67,7 @@ if ($result) {
 		echo '<tr cellspacing="2" cellpadding="2" '.$tclass.'>';
 		echo '<td>'.$myrow['topic_id'].'</td>';
 		echo '<td><a href="../edittopic.php?tid='.$myrow['topic_id'].'"">'.$myrow['topic_name'].'</a></td>';
-		echo '<td>'.'&nbsp;'.'</td></tr>';
+		echo '<td><a href="../sortreports.php?tid='.$myrow['topic_id'].'"">'._AD_GWREPORTS_ADMIN_REPORT_SORT.'</a></td></tr>';
 	}
 }
 if($cnt==0) echo '<tr><td colspan="3" align="center">'._AD_GWREPORTS_AD_TOPIC_LISTEMPTY.'</td></tr>';

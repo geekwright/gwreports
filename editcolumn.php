@@ -37,6 +37,7 @@ $column_hide=0;
 $column_sum=0;
 $column_break=0;
 $column_outline=0;
+$column_apply_nl2br=0;
 $column_is_unixtime=0;
 $column_format='';
 $column_style='';
@@ -61,6 +62,7 @@ $column_extended_format='';
 			$column_sum=$myrow['column_sum'];
 			$column_break=$myrow['column_break'];
 			$column_outline=$myrow['column_outline'];
+			$column_apply_nl2br=$myrow['column_apply_nl2br'];
 			$column_is_unixtime=$myrow['column_is_unixtime'];
 			$column_format=$myrow['column_format'];
 			$column_style=$myrow['column_style'];
@@ -96,6 +98,7 @@ $column_extended_format='';
 	if(isset($_POST['column_sum'])) $column_sum = cleaneryn($_POST['column_sum']);
 	if(isset($_POST['column_break'])) $column_break = cleaneryn($_POST['column_break']);
 	if(isset($_POST['column_outline'])) $column_outline = cleaneryn($_POST['column_outline']);
+	if(isset($_POST['column_apply_nl2br'])) $column_apply_nl2br = cleaneryn($_POST['column_apply_nl2br']);
 	if(isset($_POST['column_is_unixtime'])) $column_is_unixtime = cleaneryn($_POST['column_is_unixtime']);
 	if(isset($_POST['column_format'])) $column_format = cleaner($_POST['column_format']);
 	if(isset($_POST['column_style'])) $column_style = cleaner($_POST['column_style']);
@@ -126,6 +129,7 @@ if($op=='update') {
 	$sql.=" , column_sum = $column_sum ";
 	$sql.=" , column_break = $column_break ";
 	$sql.=" , column_outline = $column_outline ";
+	$sql.=" , column_apply_nl2br = $column_apply_nl2br ";
 	$sql.=" , column_is_unixtime = $column_is_unixtime ";
 	$sql.=" , column_format = '$sl_column_format' ";
 	$sql.=" , column_style = '$sl_column_style' ";
@@ -193,6 +197,9 @@ $body='';
 
 	$caption = _MD_GWREPORTS_COLUMN_OUTLINE;
 	$form->addElement(new XoopsFormRadioYN($caption, 'column_outline', $column_outline),false);
+
+	$caption = _MD_GWREPORTS_COLUMN_APPLY_NL2BR;
+	$form->addElement(new XoopsFormRadioYN($caption, 'column_apply_nl2br', $column_apply_nl2br),false);
 
 	$caption = _MD_GWREPORTS_COLUMN_IS_UNIXTIME;
 	$form->addElement(new XoopsFormRadioYN($caption, 'column_is_unixtime', $column_is_unixtime),false);

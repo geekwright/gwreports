@@ -143,6 +143,7 @@ if(isset($_POST['rid'])) $report_id = intval($_POST['rid']);
 					echo $col['column_sum'].$eol;
 					echo $col['column_break'].$eol;
 					echo $col['column_outline'].$eol;
+					echo $col['column_apply_nl2br'].$eol;
 					echo $col['column_is_unixtime'].$eol;
 					echo base64_encode($col['column_format']).$eol;
 					echo base64_encode($col['column_style']).$eol;

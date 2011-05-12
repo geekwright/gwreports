@@ -107,14 +107,15 @@ adminmenu(3);
 								$column_sum = intval($import[$line++]);
 								$column_break = intval($import[$line++]);
 								$column_outline = intval($import[$line++]);
+								$column_apply_nl2br = intval($import[$line++]);
 								$column_is_unixtime = intval($import[$line++]);
 								$column_format = dbescape(base64_decode($import[$line++]));
 								$column_style = dbescape(base64_decode($import[$line++]));
 								$column_extended_format = dbescape(base64_decode($import[$line++]));
 
 								$sql ='INSERT INTO '.$xoopsDB->prefix('gwreports_column');
-								$sql.=' (section, column_name, column_title, column_hide, column_sum, column_break, column_outline, column_is_unixtime, column_format, column_style, column_extended_format ) ';
-								$sql.=" VALUES ($section_id, '$column_name', '$column_title', $column_hide, $column_sum, $column_break, $column_outline, $column_is_unixtime, '$column_format', '$column_style', '$column_extended_format' ) ";
+								$sql.=' (section, column_name, column_title, column_hide, column_sum, column_break, column_outline, column_apply_nl2br, column_is_unixtime, column_format, column_style, column_extended_format ) ';
+								$sql.=" VALUES ($section_id, '$column_name', '$column_title', $column_hide, $column_sum, $column_break, $column_outline, $column_apply_nl2br, $column_is_unixtime, '$column_format', '$column_style', '$column_extended_format' ) ";
 
 								$result = $xoopsDB->queryF($sql);
 								if (!$result) {

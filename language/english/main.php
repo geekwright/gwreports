@@ -1,7 +1,7 @@
 <?php
 // @version    $Id$
 if (!defined("XOOPS_ROOT_PATH")) die("Root path not defined");
-define('_MD_GWREPORTS_TITLE','Reports');
+define('_MD_GWREPORTS_TITLE','gwreports');
 define('_MD_GWREPORTS_TITLE_SEP',' : ');
 
 // error messages
@@ -87,6 +87,7 @@ define('_MD_GWREPORTS_EDITSECTION_UPD_BUTTON_DSC','Save Changes');
 define('_MD_GWREPORTS_EDITSECTION_UPD_BUTTON','Save');
 define('_MD_GWREPORTS_EDITSECTION_DEL_BUTTON','Delete');
 define('_MD_GWREPORTS_EDITSECTION_DEL_CONFIRM','Delete this section?');
+define('_MD_GWREPORTS_EDITSECTION_LIMITED_FORM','View Section');
 
 // newcolumn
 define('_MD_GWREPORTS_NEWCOLUMN_FORM','Add Column Format');
@@ -184,6 +185,7 @@ define('_MD_GWREPORTS_COLUMN_HIDE','Hide this column?');
 define('_MD_GWREPORTS_COLUMN_SUM','Sum this column?');
 define('_MD_GWREPORTS_COLUMN_BREAK','Break on column change?');
 define('_MD_GWREPORTS_COLUMN_OUTLINE','Outline column?');
+define('_MD_GWREPORTS_COLUMN_APPLY_NL2BR','Convert newlines?');
 define('_MD_GWREPORTS_COLUMN_IS_UNIXTIME','Column is Unix Time?');
 define('_MD_GWREPORTS_COLUMN_FORMAT','sprintf() or date() format string');
 define('_MD_GWREPORTS_COLUMN_STYLE','HTML/CSS style for column');
@@ -209,4 +211,7 @@ define('_MD_GWREPORTS_PARMTYPE_DATE','Date');
 define('_MD_GWREPORTS_PARMTYPE_INTEGER','Integer');
 define('_MD_GWREPORTS_PARMTYPE_DECIMAL','Decimal');
 define('_MD_GWREPORTS_PARMTYPE_YESNO','Yes/No');
+
+// limited mode messages
+define('_MD_GWREPORTS_DISABLED', 'This function is not available.');
 ?>
