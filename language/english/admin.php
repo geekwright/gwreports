@@ -79,7 +79,7 @@ define('_AD_GWREPORTS_AD_TODO_INNODB', 'InnoDB support in MySQL is required.');
 
 // limited mode messages
 define('_AD_GWREPORTS_DISABLED', 'This function is not available.');
-define('_AD_GWREPORTS_NO_IMPORT_DIR', 'The import directory does not exist.');
+define('_AD_GWREPORTS_NO_IMPORT_DIR', 'The import directory does not exist. Please create the directory <br />%s');
 define('_AD_GWREPORTS_EMPTY_IMPORT_DIR', 'The import directory is empty.');
 define('_AD_GWREPORTS_LIMITED_MODE', 'This installation is operating in limited mode.');
 ?>

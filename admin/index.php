@@ -25,13 +25,13 @@ $todocnt = 0;
 $op='';
 
 
-if(defined("_MI_GWREPORTS_AD_LIMITED")) {
+if(!defined("_MI_GWREPORTS_AD_LIMITED")) {
 	$pathname=XOOPS_TRUST_PATH.'/modules/gwreports/import/';
 	if(!is_dir($pathname))  {
 		++$todocnt;
 		$todo[$todocnt]['link']='index.php';
 		$todo[$todocnt]['linktext']= _AD_GWREPORTS_AD_TODO_RETRY;
-		$todo[$todocnt]['msg']= _AD_GWREPORTS_NO_IMPORT_DIR;
+		$todo[$todocnt]['msg']= sprintf(_AD_GWREPORTS_NO_IMPORT_DIR,$pathname);
 	}
 }
 
