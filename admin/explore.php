@@ -26,13 +26,12 @@ function getDatabaseList() {
 	global $xoopsDB;
 	$databases=array();
 
-	$sql='SELECT SCHEMA_NAME FROM information_schema.SCHEMATA ';
-	$sql.= ' ORDER BY SCHEMA_NAME ';
+	$sql='SHOW DATABASES';
 
-	$result = $xoopsDB->query($sql);
+	$result = $xoopsDB->queryF($sql);
 	if ($result) {
-		while($myrow=$xoopsDB->fetchArray($result)) {
-			$databases[$myrow['SCHEMA_NAME']] = $myrow['SCHEMA_NAME'];
+		while($myrow=$xoopsDB->fetchRow($result)) {
+			$databases[$myrow[0]] = $myrow[0];
 		}
 	}
 	return $databases;
@@ -43,14 +42,13 @@ function getTableList($database) {
 	global $xoopsDB;
 	$tables=array();
 
-	$sql='SELECT TABLE_NAME FROM `information_schema`.`TABLES` ';
-	$sql.=' WHERE TABLE_SCHEMA = \''.dbescape($database).'\' ';
-	$sql.= ' ORDER BY TABLE_NAME ';
+	$sql='SHOW TABLES FROM '.dbescape($database);
 
-	$result = $xoopsDB->query($sql);
+
+	$result = $xoopsDB->queryF($sql);
 	if ($result) {
-		while($myrow=$xoopsDB->fetchArray($result)) {
-			$tables[$myrow['TABLE_NAME']] = $myrow['TABLE_NAME'];
+		while($myrow=$xoopsDB->fetchRow($result)) {
+			$tables[$myrow[0]] = $myrow[0];
 		}
 	}
 	return $tables;
@@ -60,28 +58,24 @@ function getBasicQuery($database,$table,&$lines,&$rptname) {
 
 	global $xoopsDB;
 	$query=''; $where='';
-	$sql='SELECT COLUMN_NAME, ORDINAL_POSITION, COLUMN_TYPE, COLUMN_KEY, DATA_TYPE ';
-	$sql.=' FROM information_schema.COLUMNS ';
-	$sql.=' WHERE TABLE_SCHEMA = \''.dbescape($database).'\' ';
-	$sql.=' AND TABLE_NAME = \''.dbescape($table).'\' ';
-	$sql.=' order by ORDINAL_POSITION ';
+	$sql='SHOW COLUMNS FROM '.dbescape($database).'.'.dbescape($table);
 
-	$result = $xoopsDB->query($sql);
+	$result = $xoopsDB->queryF($sql);
 	if ($result) {
 		$prefix='SELECT ';
 		$whereprefix='WHERE ';
 		while($myrow=$xoopsDB->fetchArray($result)) {
 			++$lines;
-			$line=$prefix.$myrow['COLUMN_NAME'].' -- '.$myrow['COLUMN_TYPE']."\n";
+			$line=$prefix.$myrow['Field'].' -- '.$myrow['Type']."\n";
 			$query.=$line;
 			$prefix=', ';
-			if($myrow['COLUMN_KEY']=='PRI') {
-				if((stristr($myrow['DATA_TYPE'], 'int') === FALSE) 
-					&& (stristr($myrow['DATA_TYPE'], 'dec') === FALSE)
-					&& (stristr($myrow['DATA_TYPE'], 'float') === FALSE)){ // text
-					$where.=$whereprefix.$myrow['COLUMN_NAME'].' = \'{'.$myrow['COLUMN_NAME']."}'\n";
+			if($myrow['Key']=='PRI') {
+				if((stristr($myrow['Type'], 'int') === FALSE) 
+					&& (stristr($myrow['Type'], 'dec') === FALSE)
+					&& (stristr($myrow['Type'], 'float') === FALSE)){ // text
+					$where.=$whereprefix.$myrow['Field'].' = \'{'.$myrow['Field']."}'\n";
 				} else { 
-					$where.=$whereprefix.$myrow['COLUMN_NAME'].' = {'.$myrow['COLUMN_NAME']."}\n";
+					$where.=$whereprefix.$myrow['Field'].' = {'.$myrow['Field']."}\n";
 				}
 				++$lines;
 				$whereprefix=' AND ';
@@ -118,6 +112,7 @@ function getBasicQuery($database,$table,&$lines,&$rptname) {
 	// XoopsFormSelect( string $caption, string $name, [mixed $value = null], [int $size = 1], [bool $multiple = false])
 	$caption = _AD_GWREPORTS_AD_EXPLORE_DATABASE;
 	$databases=getDatabaseList();
+	if(!isset($databases[$database])) $database=''; // not a valid database
 	$dblistbox = new XoopsFormSelect($caption, 'database', 'db_'.$database, 1, false);
 	$dblistbox->addOption('', _AD_GWREPORTS_AD_EXPLORE_PICKDB);
 	foreach ($databases as $i) {
