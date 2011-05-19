@@ -30,10 +30,49 @@ if(defined("_MI_GWREPORTS_AD_LIMITED")) {
 	if(!is_dir($pathname))  {
 		++$todocnt;
 		$todo[$todocnt]['link']='index.php';
-		$todo[$todocnt]['linktext']= 'Retry';
+		$todo[$todocnt]['linktext']= _AD_GWREPORTS_AD_TODO_RETRY;
 		$todo[$todocnt]['msg']= _AD_GWREPORTS_NO_IMPORT_DIR;
 	}
 }
+
+// check mysql version - only affects explorer function which is not available in limited mode
+if(0) {
+//if(!defined("_MI_GWREPORTS_AD_LIMITED")) {
+	$mysqlversion_required='5.0.0';
+
+	$sql="select version() as version";
+	$result = $xoopsDB->queryF($sql);
+	if ($result) {
+		while($myrow=$xoopsDB->fetchArray($result)) {
+			$mysqlversion=$myrow['version'];
+		}
+		if(version_compare($mysqlversion,$mysqlversion_required) < 0) {
+			++$todocnt;
+			$todo[$todocnt]['link']='index.php';
+			$todo[$todocnt]['linktext']=_AD_GWREPORTS_AD_TODO_RETRY;
+			$todo[$todocnt]['msg']= sprintf(_AD_GWREPORTS_AD_TODO_MYSQL, $mysqlversion_required, $mysqlversion);
+		}
+	}
+}
+
+// check for InnoDB support in mysql. We should have bombed out in install, but ...
+
+	$have_innodb=false;
+
+	$sql="show ENGINES";
+	$result = $xoopsDB->queryF($sql);
+	if ($result) {
+		while($myrow=$xoopsDB->fetchArray($result)) {
+			if($myrow['Engine']=='InnoDB' && ($myrow['Support']=='YES' || $myrow['Support']=='DEFAULT')) $have_innodb=true;
+		}
+	}
+	if(!$have_innodb) {
+		++$todocnt;
+		$todo[$todocnt]['link']='index.php';
+		$todo[$todocnt]['linktext']=_AD_GWREPORTS_AD_TODO_RETRY;
+		$todo[$todocnt]['msg']= _AD_GWREPORTS_AD_TODO_INNODB;
+	}
+
 
 // we don't have any todo checks for gwreports yet
 if(false) {

@@ -73,6 +73,9 @@ define('_AD_GWREPORTS_ADMIN_PARAMETER_SORT', 'Reorder Parameters');
 define('_AD_GWREPORTS_TODO_TITLE', 'Action Required');
 define('_AD_GWREPORTS_TODO_ACTION', 'Action');
 define('_AD_GWREPORTS_TODO_MESSAGE', 'Message');
+define('_AD_GWREPORTS_AD_TODO_RETRY', 'Retry');
+define('_AD_GWREPORTS_AD_TODO_MYSQL', 'MySQL version %1$s or above is required for the Explore function. (Detected=%2$s)');
+define('_AD_GWREPORTS_AD_TODO_INNODB', 'InnoDB support in MySQL is required.');
 
 // limited mode messages
 define('_AD_GWREPORTS_DISABLED', 'This function is not available.');
