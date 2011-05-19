@@ -569,6 +569,9 @@ if ($rid) { // b_gwreports_
 	$pc=0;
 	$parmtags[$pc]='{$xpfx}';
 	$parmsubs[$pc]=$xoopsDB->prefix('').'_';
+	++$pc;
+	$parmtags[$pc]='{$xuid}';
+	$parmsubs[$pc]=($xoopsUser ? $xoopsUser->getVar('uid') : 0 );
 	foreach ($parameters as $v) {
 		++$pc;
 		$parmtags[$pc]='{'.$v['parameter_name'].'}';
