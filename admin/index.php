@@ -35,16 +35,14 @@ if(defined("_MI_GWREPORTS_AD_LIMITED")) {
 	}
 }
 
-// check mysql version - only affects explorer function which is not available in limited mode
-if(0) {
-//if(!defined("_MI_GWREPORTS_AD_LIMITED")) {
-	$mysqlversion_required='5.0.0';
+// check mysql version
+	$mysqlversion_required='4.1.0';
 
-	$sql="select version() as version";
+	$sql="select version()";
 	$result = $xoopsDB->queryF($sql);
 	if ($result) {
-		while($myrow=$xoopsDB->fetchArray($result)) {
-			$mysqlversion=$myrow['version'];
+		while($myrow=$xoopsDB->fetchRow($result)) {
+			$mysqlversion=$myrow[0];
 		}
 		if(version_compare($mysqlversion,$mysqlversion_required) < 0) {
 			++$todocnt;
@@ -53,7 +51,6 @@ if(0) {
 			$todo[$todocnt]['msg']= sprintf(_AD_GWREPORTS_AD_TODO_MYSQL, $mysqlversion_required, $mysqlversion);
 		}
 	}
-}
 
 // check for InnoDB support in mysql. We should have bombed out in install, but ...
 
