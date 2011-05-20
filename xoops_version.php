@@ -14,7 +14,7 @@
 if (!defined("XOOPS_ROOT_PATH")) die("Root path not defined");
 
 $modversion['name'] = _MI_GWREPORTS_NAME;
-$modversion['version'] = '1.0';
+$modversion['version'] = '1.0.1';
 $modversion['description'] = _MI_GWREPORTS_DESC;
 $modversion['credits'] = "geekwight, LLC";
 $modversion['help'] = "";
