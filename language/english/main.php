@@ -211,6 +211,7 @@ define('_MD_GWREPORTS_PARMTYPE_DATE','Date');
 define('_MD_GWREPORTS_PARMTYPE_INTEGER','Integer');
 define('_MD_GWREPORTS_PARMTYPE_DECIMAL','Decimal');
 define('_MD_GWREPORTS_PARMTYPE_YESNO','Yes/No');
+define('_MD_GWREPORTS_PARMTYPE_AUTOCOMPLETE','Auto Complete');
 
 // limited mode messages
 define('_MD_GWREPORTS_DISABLED', 'This function is not available.');

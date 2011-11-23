@@ -65,6 +65,7 @@ $report_name='';
 			$parameter_type=$myrow['parameter_type'];
 			$parameter_decimals=$myrow['parameter_decimals'];
 			$report_id=$myrow['report'];
+			$sqlchoice=$myrow['sqlchoice'];
 			++$cnt;
 		}
 		if($cnt) {
@@ -92,6 +93,7 @@ $report_name='';
 	if(isset($_POST['parameter_type'])) $parameter_type = cleaner($_POST['parameter_type']);
 	$parameter_type=checkParmType($parmtypes, $parameter_type);
 
+	if(isset($_POST['sqlchoice'])) $sqlchoice = cleaner($_POST['sqlchoice']);
 	if(isset($_POST['parameter_required'])) $parameter_required = cleaneryn($_POST['parameter_required']);
 	if(isset($_POST['parameter_length'])) $parameter_length = abs(intval($_POST['parameter_length']));
 	if($parameter_length==0) $parameter_length=20;
@@ -118,6 +120,7 @@ if($op=='update') {
 	$sl_parameter_description=dbescape($parameter_description);
 	$sl_parameter_title=dbescape($parameter_title);
 	$sl_parameter_default=dbescape($parameter_default);
+	$sl_sqlchoice=dbescape($sqlchoice);
 
 	$dberr=false;
 	$dbmsg='';
@@ -131,6 +134,7 @@ if($op=='update') {
 	$sql.=" , parameter_length  =  $parameter_length ";
 	$sql.=" , parameter_type  =  '$parameter_type' ";
 	$sql.=" , parameter_decimals  =  $parameter_decimals ";
+	$sql.=" , sqlchoice  =  '$sl_sqlchoice' ";
 	$sql.=" WHERE parameter_id = $parameter_id ";
 	$result = $xoopsDB->queryF($sql);
 	if (!$result) {
@@ -182,6 +186,12 @@ $body='';
 
 	$caption = _MD_GWREPORTS_PARAMETER_DESC;
 	$form->addElement(new XoopsFormTextArea($caption, 'parameter_description', $parameter_description, 4, 50, 'parameter_description'),false);
+
+	$caption = _MD_GWREPORTS_PARAMETER_SQLCHOICE;
+	$sqlfield=new XoopsFormTextArea($caption, 'sqlchoice', $sqlchoice, 4, 50, 'sqlchoice');
+	$sqlfield->setDescription("Use simple sql statement, and fix column as value and label, example:<br/>select uid as value,concat(uid,' - ', uname) as label from xoops_users");
+	$form->addElement($sqlfield,false);
+
 
 	$caption = _MD_GWREPORTS_PARAMETER_LENGTH;
 	$form->addElement(new XoopsFormText($caption, 'parameter_length', 8 , 8, intval($parameter_length)),true);

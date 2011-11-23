@@ -29,6 +29,7 @@ CREATE TABLE gwreports_parameter (
   parameter_length int(3) unsigned NOT NULL default '0',
   parameter_type enum('text','liketext','date','integer','yesno','decimal') NOT NULL default 'text',
   parameter_decimals int(3) unsigned NOT NULL default '0',
+  sqlchoice text NOT NULL,
   PRIMARY KEY (parameter_id),
   UNIQUE KEY (report, parameter_name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

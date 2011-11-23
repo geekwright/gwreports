@@ -1,3 +1,43 @@
+<script src="include/jqueryui/jquery.min.js" type="text/javascript"></script> 
+<script src="include/jqueryui/ui/jquery.ui.core.js" type="text/javascript"></script> 
+<script src="include/jqueryui/ui/jquery.ui.widget.js" type="text/javascript"></script> 
+<script src="include/jqueryui/ui/jquery.ui.button.js" type="text/javascript"></script> 
+<script src="include/jqueryui/ui/jquery.ui.datepicker.js" type="text/javascript"></script> 
+<script src="include/jqueryui/ui/jquery.ui.autocomplete.js" type="text/javascript"></script> 
+<script src="include/jqueryui/ui/jquery.dataTables.js" type="text/javascript"></script> 
+<link rel="stylesheet" href="include/jqueryui/themes/base/jquery.ui.all.css" type="text/css" /> 
+<link rel="stylesheet" href="include/jqueryui/themes/ui-lightness/jquery.ui.autocomplete.css" type="text/css" /> 
+
+<script>
+	function activateAutoComplete(){
+	
+		$(".autocomplete").each(function(index){
+			link=$(this).attr('autocompleteurl');
+			
+			$(this).autocomplete({
+			source:link,
+			minLength: 0,
+			autoFocus:true,		
+			select: function( event, ui ) {				
+				$(this).change();
+			}
+			});
+	
+	$(".dataTable").dataTable();
+	
+			$(this).click(function(){
+				$(this).autocomplete("search",$(this).val());
+				$(this).select();
+				});
+
+
+		});
+	}
+	$(document).ready(function(){
+		activateAutoComplete();
+		});
+</script>
+
 <{if isset($bc_modtitle)}>
 <div class="breadcrumb">
 <a href="index.php"><{$bc_modtitle}></a>

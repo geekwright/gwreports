@@ -363,6 +363,9 @@ if ($op=='run') {
 			case "yesno":
 				$parmsubs[$pc]=intval($v['value']);
 		        break;
+			case "autocomplete":
+				$parmsubs[$pc]=$v['value'];
+		        break;
 			default:
 				$parmsubs[$pc]=dbescape($v['value']);
 		        break;
@@ -394,7 +397,7 @@ if ($op=='run') {
 				$rowheaders=array();
 				$colcount=initializeColumns($columns, $myrow, $rowheaders);
 				if($section_multirow) {
-					$body.='<table><tr>';
+					$body.='<table class="dataTable"><thead><tr>';
 					if($section_showtitle) {
 						$colspan=$colcount;
 						$body.="<th colspan=$colspan>$section_name</th></tr><tr>";
@@ -402,7 +405,7 @@ if ($op=='run') {
 					foreach ($myrow as $col=>$row) {
 						$body.=emitColumnHeader($col, $columns,$section_multirow);
 					}
-					$body.='</tr>';
+					$body.='</tr></thead><tbody>';
 					while($myrow) {
 						$breaktriggered=checkBreak($columns, $myrow);
 						if($breaktriggered) {
@@ -437,7 +440,7 @@ if ($op=='run') {
 					}
 
 				} else { // $section_multirow is false
-					$body.='<table>';
+					$body.='</tbody><table>';
 					if($section_showtitle) {
 						$body.="<tr><th colspan=\"2\">$section_name</th></tr>";
 					}

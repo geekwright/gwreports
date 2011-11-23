@@ -213,6 +213,7 @@ $parmtypes[]=array('parm_value'=>'date', 'parm_display'=> _MD_GWREPORTS_PARMTYPE
 $parmtypes[]=array('parm_value'=>'integer', 'parm_display'=> _MD_GWREPORTS_PARMTYPE_INTEGER );
 $parmtypes[]=array('parm_value'=>'decimal', 'parm_display'=> _MD_GWREPORTS_PARMTYPE_DECIMAL );
 $parmtypes[]=array('parm_value'=>'yesno', 'parm_display'=> _MD_GWREPORTS_PARMTYPE_YESNO );
+$parmtypes[]=array('parm_value'=>'autocomplete', 'parm_display'=> _MD_GWREPORTS_PARMTYPE_AUTOCOMPLETE );
 
 	return $parmtypes;
 }
@@ -406,6 +407,11 @@ global $xoopsModuleConfig;
 			case "datetime":
 				$element=new XoopsFormDateTime($caption, $parm_name, $parm_length, $parm_value);
 		        break;
+	 	    case "autocomplete":
+		     	$element=new XoopsFormText($caption, $parm_name, $parm_length, $parm_length, htmlspecialchars($parm_value, ENT_QUOTES));
+		     	$element->setExtra(" class='autocomplete' size='10' autocompleteurl='autocomplete.php?parameter_id=".$v['parameter_id']."'" );
+		    break;
+	
 			default: // text, liketext, int, decimal
 				$element=new XoopsFormText($caption, $parm_name, $parm_length, $parm_length, htmlspecialchars($parm_value, ENT_QUOTES));
 		        break;
@@ -475,6 +481,10 @@ function getParameterRecap($parameters) {
 				$parm_value=strftime('%Y-%m-%d', strtotime($parm_value));
 
 		        break;
+		    case "autocomplete":
+		    	$parm_value=$parm_value.'';
+		    
+				break;
 			default: // text, liketext, int
 				$parm_value=$parm_value.'';
 		        break;

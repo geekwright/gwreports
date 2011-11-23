@@ -374,7 +374,7 @@ if ($op=='run') {
 				$rowheaders=array();
 				$colcount=initializeColumns($columns, $myrow, $rowheaders);
 				if($section_multirow) {
-					$body.='<table><tr>';
+					$body.='<table class="dataTable"><tr>';
 					if($section_showtitle) {
 						$colspan=$colcount;
 						$body.="<th colspan=$colspan>$section_name</th></tr><tr>";
