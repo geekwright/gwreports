@@ -440,7 +440,7 @@ if ($op=='run') {
 					}
 
 				} else { // $section_multirow is false
-					$body.='</tbody><table>';
+					$body.='<table>';
 					if($section_showtitle) {
 						$body.="<tr><th colspan=\"2\">$section_name</th></tr>";
 					}
