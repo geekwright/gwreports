@@ -12,14 +12,12 @@
 * @version    $Id$
 */
 
-include ('../../../include/cp_header.php');
-include_once "functions.php";
+include 'header.php';
 include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
-include_once ('../include/dbcommon.php');
 
-xoops_cp_header();
-
-adminmenu(2);
+	if(!$xoop25plus) {
+		adminmenu(3);
+	}
 
 	$myuserid = $xoopsUser->getVar('uid');
 
@@ -81,5 +79,5 @@ $body.=' | <a href="'.XOOPS_URL.'/modules/'.$dirname.'/sorttopics.php">'._AD_GWR
 
 echo $body;
 
-xoops_cp_footer();
+include 'footer.php';
 ?>

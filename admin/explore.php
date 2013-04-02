@@ -12,14 +12,12 @@
 * @version    $Id$
 */
 
-include ('../../../include/cp_header.php');
-include_once "functions.php";
+include 'header.php';
 include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
-include_once ('../include/dbcommon.php');
 
-xoops_cp_header();
-
-adminmenu(4);
+	if(!$xoop25plus) {
+		adminmenu(5);
+	}
 
 function getDatabaseList() {
 
@@ -171,5 +169,5 @@ $body.=' | <a href="'.XOOPS_URL.'/modules/'.$dirname.'/newtopic.php">'._AD_GWREP
 //echo $body;
 
 //echo '<pre>$_POST='.print_r($_POST,true).'</pre>';
-xoops_cp_footer();
+include 'footer.php';
 ?>

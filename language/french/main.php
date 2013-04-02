@@ -215,7 +215,7 @@ define('_MD_GWREPORTS_PARMTYPE_YESNO','Oui/Non');
 // limited mode messages
 define('_MD_GWREPORTS_DISABLED', 'Cette fonction n\est pas disponible.');
 
-// new in 1.1
+// new in 1.1 -- need verification
 define('_MD_GWREPORTS_PARMTYPE_AUTOCOMPLETE','auto-complétion');
 define('_MD_GWREPORTS_PARAMETER_SQLCHOICE','Requ&ecirc;te SQL pour l\'auto-compl&eacute;tion');
 define('_MD_GWREPORTS_PARAMETER_SQLCHOICE_DESC',"Requ&ecirc;te SQL retournant deux colonnes nomm&eacute;es, value et label. Par exemple:<br/>select uid as value, uname as label from {\$xpfx}xoops_users");

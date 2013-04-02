@@ -12,11 +12,18 @@
 * @version    $Id$
 */
 
-include ('../../../include/cp_header.php');
-xoops_cp_header();
-include_once "functions.php";
-include_once "../include/dbcommon.php";
-adminmenu(1);
+include 'header.php';
+
+	if($xoop25plus) {
+		echo $moduleAdmin->addNavigation('index.php') ;
+		$welcome=_AD_GW_ADMENU_WELCOME;
+		$moduleAdmin->addInfoBox($welcome);
+		$moduleAdmin->addInfoBoxLine($welcome, _AD_GW_ADMENU_MESSAGE, '', '', 'information');
+	}
+	else {
+		adminmenu(1);
+	}
+
 
 // build todo list
 $todo = array();
@@ -24,14 +31,16 @@ $todocnt = 0;
 
 $op='';
 
-
 if(defined("_MI_GWREPORTS_AD_LIMITED")) {
 	$pathname=XOOPS_TRUST_PATH.'/modules/gwreports/import/';
-	if(!is_dir($pathname))  {
-		++$todocnt;
-		$todo[$todocnt]['link']='index.php';
-		$todo[$todocnt]['linktext']= _AD_GWREPORTS_AD_TODO_RETRY;
-		$todo[$todocnt]['msg']= sprintf(_AD_GWREPORTS_NO_IMPORT_DIR,$pathname);
+	if($xoop25plus) $moduleAdmin->addConfigBoxLine($pathname, 'folder');
+	else {
+		if(!is_dir($pathname))  {
+			++$todocnt;
+			$todo[$todocnt]['link']='index.php';
+			$todo[$todocnt]['linktext']= _AD_GWREPORTS_AD_TODO_RETRY;
+			$todo[$todocnt]['msg']= sprintf(_AD_GWREPORTS_NO_IMPORT_DIR,$pathname);
+		}
 	}
 }
 
@@ -45,10 +54,15 @@ if(defined("_MI_GWREPORTS_AD_LIMITED")) {
 			$mysqlversion=$myrow[0];
 		}
 		if(version_compare($mysqlversion,$mysqlversion_required) < 0) {
-			++$todocnt;
-			$todo[$todocnt]['link']='index.php';
-			$todo[$todocnt]['linktext']=_AD_GWREPORTS_AD_TODO_RETRY;
-			$todo[$todocnt]['msg']= sprintf(_AD_GWREPORTS_AD_TODO_MYSQL, $mysqlversion_required, $mysqlversion);
+			$message=sprintf(_AD_GWREPORTS_AD_TODO_MYSQL, $mysqlversion_required, $mysqlversion);
+			if($xoop25plus) {
+				$moduleAdmin->addConfigBoxLine('<span style="color:orange"><img src="../images/admin/warn.png" alt="!" />'.$message.'</span>', 'default');
+			} else {
+				++$todocnt;
+				$todo[$todocnt]['link']='index.php';
+				$todo[$todocnt]['linktext']=_AD_GWREPORTS_AD_TODO_RETRY;
+				$todo[$todocnt]['msg']= $message;
+			}
 		}
 	}
 
@@ -64,10 +78,15 @@ if(defined("_MI_GWREPORTS_AD_LIMITED")) {
 		}
 	}
 	if(!$have_innodb) {
-		++$todocnt;
-		$todo[$todocnt]['link']='index.php';
-		$todo[$todocnt]['linktext']=_AD_GWREPORTS_AD_TODO_RETRY;
-		$todo[$todocnt]['msg']= _AD_GWREPORTS_AD_TODO_INNODB;
+		$message=_AD_GWREPORTS_AD_TODO_INNODB;
+		if($xoop25plus) {
+			$moduleAdmin->addConfigBoxLine('<span style="color:orange"><img src="../images/admin/warn.png" alt="!" />'.$message.'</span>', 'default');
+		} else {
+			++$todocnt;
+			$todo[$todocnt]['link']='index.php';
+			$todo[$todocnt]['linktext']=_AD_GWREPORTS_AD_TODO_RETRY;
+			$todo[$todocnt]['msg']= $message;
+		}
 	}
 
 
@@ -80,7 +99,8 @@ if(false) {
 }
 
 // display todo list
-if($todocnt>0) {
+if($xoop25plus) echo $moduleAdmin->renderIndex();
+if($todocnt>0 && !$xoop25plus) {
 	$teven='class="even"';
 	$todd='class="odd"';
 	$tclass=$teven;
@@ -100,14 +120,15 @@ if($todocnt>0) {
 }
 
 // about section
-echo'<table width="100%" border="0" cellspacing="1" class="outer">';
-echo '<tr><th>'._AD_GWREPORTS_ADMENU_ABOUT.'</th></tr><tr><td width="100%" >';
-echo '<center><br /><b>'. _MI_GWREPORTS_DESC . '</b></center><br />';
-echo '<center>Brought to you by <a href="http://www.geekwright.com/" target="_blank">geekwright, LLC</a></center><br />';
-echo '</td></tr>';
-if(defined("_MI_GWREPORTS_AD_LIMITED")) echo '<tr><td class="odd"><center>'._AD_GWREPORTS_LIMITED_MODE.'</center</td></tr>';
-echo '</table>';
+if(!$xoop25plus) {
+	echo'<table width="100%" border="0" cellspacing="1" class="outer">';
+	echo '<tr><th>'._AD_GWREPORTS_ADMENU_ABOUT.'</th></tr><tr><td width="100%" >';
+	echo '<center><br /><b>'. _MI_GWREPORTS_DESC . '</b></center><br />';
+	echo '<center>Brought to you by <a href="http://www.geekwright.com/" target="_blank">geekwright, LLC</a></center><br />';
+	echo '</td></tr>';
+	if(defined("_MI_GWREPORTS_AD_LIMITED")) echo '<tr><td class="odd"><center>'._AD_GWREPORTS_LIMITED_MODE.'</center</td></tr>';
+	echo '</table>';
+}
 
-
-xoops_cp_footer();
+include 'footer.php';
 ?>

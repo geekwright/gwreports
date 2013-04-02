@@ -4,7 +4,7 @@
 *
 * This file is part of gwreports - geekwright Reports
 *
-* @copyright  Copyright © 2011 geekwright, LLC. All rights reserved. 
+* @copyright  Copyright © 2011-2013 geekwright, LLC. All rights reserved. 
 * @license    gwreports/docs/license.txt  GNU General Public License (GPL)
 * @since      1.0
 * @author     Richard Griffith <richard@geekwright.com>
@@ -14,15 +14,27 @@
 if (!defined("XOOPS_ROOT_PATH")) die("Root path not defined");
 
 $modversion['name'] = _MI_GWREPORTS_NAME;
-$modversion['version'] = '1.0.1';
+$modversion['version'] = '1.1';
 $modversion['description'] = _MI_GWREPORTS_DESC;
-$modversion['credits'] = "geekwight, LLC";
+$modversion['credits'] = "Auto Completion parameters by kstan, French language support by Philippe Masson";
 $modversion['help'] = "";
 $modversion['license'] = "GPL V2";
 $modversion['official'] = 0;
 if (defined("ICMS_ROOT_PATH")) $modversion['image'] = "images/icon_big.png";
 else $modversion['image'] = "images/icon.png";
 $modversion['dirname'] = basename( dirname( __FILE__ ) ) ;
+
+// things for ModuleAdmin() class
+$modversion['license_url'] = XOOPS_URL.'/modules/gwreports/docs/license.txt';
+$modversion['license_url'] = substr($modversion['license_url'],strpos($modversion['license_url'],'//')+2);
+$modversion['release_date']     = '2013/04/01';
+$modversion['module_website_url'] = 'geekwright.com';
+$modversion['module_website_name'] = 'geekwright, LLC';
+$modversion['module_status'] = "Alpha";
+$modversion['min_php']='5.2';
+$modversion['min_xoops']='2.5';
+$modversion['system_menu'] = 1;
+$modversion['help'] = "page=help";
 
 // Admin things
 $modversion['hasAdmin'] = 1;

@@ -82,4 +82,17 @@ define('_AD_GWREPORTS_DISABLED', 'This function is not available.');
 define('_AD_GWREPORTS_NO_IMPORT_DIR', 'The import directory does not exist. Please create the directory <br />%s');
 define('_AD_GWREPORTS_EMPTY_IMPORT_DIR', 'The import directory is empty.');
 define('_AD_GWREPORTS_LIMITED_MODE', 'This installation is operating in limited mode.');
+
+// new in 1.1
+// about and menu strings
+define('_AD_GW_ABOUT_ABOUT', 'About');
+define('_AD_GW_ABOUT_AUTHOR', 'By');
+define('_AD_GW_ABOUT_CREDITS', 'Credits');
+define('_AD_GW_ABOUT_LICENSE', 'License:');
+define('_AD_GW_ADMENU_PREF', 'Preferences');
+define('_AD_GW_ADMENU_GOMOD', 'Go To Module');
+define('_AD_GW_ADMENU_HELP', 'Help');
+define('_AD_GW_ADMENU_TOADMIN', 'Back to Module Administration');
+define('_AD_GW_ADMENU_WELCOME', 'Welcome to gwreports!');
+define('_AD_GW_ADMENU_MESSAGE', '<img src="../images/icon_big.png" alt="Logo" style="float:left; margin-right:2em;" /> A MySQL Report Generation Tool.');
 ?>

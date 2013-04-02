@@ -31,4 +31,6 @@ define("_MI_GWREPORTS_AD_TOPIC", "Sujets");
 define("_MI_GWREPORTS_AD_REPORT", "Rapports");
 define("_MI_GWREPORTS_AD_EXPLORE", "Explorer");
 
+// new in 1.1 - need verification
+define("_MI_GWREPORTS_AD_ABOUT", "A propos");
 ?>

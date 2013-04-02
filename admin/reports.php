@@ -12,14 +12,12 @@
 * @version    $Id$
 */
 
-include ('../../../include/cp_header.php');
-include_once "functions.php";
+include 'header.php';
 include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
-include_once ('../include/dbcommon.php');
 
-xoops_cp_header();
-
-adminmenu(3);
+	if(!$xoop25plus) {
+		adminmenu(4);
+	}
 
 	$myuserid = $xoopsUser->getVar('uid');
 
@@ -107,5 +105,5 @@ $body.='<br /><a href="'.XOOPS_URL.'/modules/'.$dirname.'/newreport.php">'._AD_G
 $body.=' | <a href="import.php">'._AD_GWREPORTS_AD_REPORT_IMPORT.'</a>';
 $body.=' | <a href="'.XOOPS_URL.'/modules/'.$dirname.'/newtopic.php">'._AD_GWREPORTS_ADMIN_TOPIC_ADD.'</a>';echo $body;
 
-xoops_cp_footer();
+include 'footer.php';
 ?>

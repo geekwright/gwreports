@@ -82,4 +82,17 @@ define('_AD_GWREPORTS_DISABLED', 'Cette fonction n\est pas disponible.');
 define('_AD_GWREPORTS_NO_IMPORT_DIR', 'Le r&eacute;pertoire d\'import n\'existe pas, merci de cr&eacute;er le r&eacute;pertoire <br />%s');
 define('_AD_GWREPORTS_EMPTY_IMPORT_DIR', 'Le r&eacute;pertoire d\'import est vide.');
 define('_AD_GWREPORTS_LIMITED_MODE', 'Cette installation s\'execute en mode limit&eacute;.');
+
+// new in 1.1 -- need verification
+// about and menu strings
+define('_AD_GW_ABOUT_ABOUT', 'A propos');
+define('_AD_GW_ABOUT_AUTHOR', 'par');
+define('_AD_GW_ABOUT_CREDITS', 'Cr&eacute;dits');
+define('_AD_GW_ABOUT_LICENSE', 'Licence:');
+define('_AD_GW_ADMENU_PREF', 'Pr&eacute;f&eacute;rences');
+define('_AD_GW_ADMENU_GOMOD', 'Aller à Module');
+define('_AD_GW_ADMENU_HELP', 'Page d\'aide');
+define('_AD_GW_ADMENU_TOADMIN', 'Retour &agrave; l\'administration du module');
+define('_AD_GW_ADMENU_WELCOME', 'Bienvenue sur gwreports!');
+define('_AD_GW_ADMENU_MESSAGE', '<img src="../images/icon_big.png" alt="Logo" style="float:left; margin-right:2em;" /> G&eacute;n&eacute;rateur de rapports');
 ?>

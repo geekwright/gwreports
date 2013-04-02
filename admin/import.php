@@ -12,14 +12,13 @@
 * @version    $Id$
 */
 
-include ('../../../include/cp_header.php');
-include_once "functions.php";
+include 'header.php';
 include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
-include_once ('../include/dbcommon.php');
 
-xoops_cp_header();
+	if(!$xoop25plus) {
+		adminmenu(4);
+	}
 
-adminmenu(3);
 
 	$pathname=XOOPS_ROOT_PATH.'/uploads/';
 	if(isset($_POST['xoops_upload_file'][0])) {
@@ -183,5 +182,5 @@ echo $body;
 //echo '<pre>$_POST='.print_r($_POST,true).'</pre>';
 //echo '<pre>$_FILES='.print_r($_FILES,true).'</pre>';
 
-xoops_cp_footer();
+include 'footer.php';
 ?>
