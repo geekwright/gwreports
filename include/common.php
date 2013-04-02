@@ -159,8 +159,7 @@ function checkUserReportAccess($report_id) {
 	$result = $xoopsDB->query($sql);
 	if ($result) {
 		if($myrow=$xoopsDB->fetchArray($result)) {
-			$cnt=$myrow['cnt'] = $myrow;
-			if($cnt>0) $access_ok=true;
+			if($myrow['cnt']>0) $access_ok=true;
 		}
 	}
 	return $access_ok;
