@@ -12,11 +12,22 @@
 * @version    $Id$
 */
 
-if (!defined("XOOPS_ROOT_PATH")) die("XOOPS root path not defined");
+if (!defined("XOOPS_ROOT_PATH")) die("Root path not defined");
 
 function xoops_module_update_gwreports(&$module, $old_version) {
-// currently nothing to do
-    $module->setErrors("Update Post-Process Completed");
+global $xoopsDB;
+
+	if($old_version<102) {
+		$sql=    'ALTER TABLE '.$xoopsDB->prefix('gwreports_parameter')." CHANGE parameter_type parameter_type enum('text','liketext','date','integer','yesno','decimal','autocomplete') NOT NULL default 'text'";
+		$xoopsDB->queryF($sql);
+
+		$sql='ALTER TABLE '.$xoopsDB->prefix('gwreports_parameter').' CHANGE sqlchoice parameter_sqlchoice text NOT NULL';
+		$xoopsDB->queryF($sql);
+
+		$sql='ALTER TABLE '.$xoopsDB->prefix('gwreports_parameter').' ADD COLUMN parameter_sqlchoice text NOT NULL AFTER parameter_decimals';
+		$xoopsDB->queryF($sql);
+
+	}
     return true;
 }
 
