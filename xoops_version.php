@@ -150,4 +150,8 @@ $modversion['templates'][] = array(
   'file' => 'gwreports_topic.html',
   'description' => 'Topic Manager' );
 
+$modversion['templates'][] = array(
+  'file' => 'gwreports_autocomplete.html',
+  'description' => 'Auto Complete Scripts and Styles' );
+
 ?>
