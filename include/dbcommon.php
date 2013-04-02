@@ -67,8 +67,9 @@ function dbescape($string) {
 
 function clipstring($string,$length) {
 	// encoding parameter may have naming issues in some cases but seems to work for utf-8
-	if ( function_exists('mb_substr') ) $ret=mb_substr ($string, 0, $length,XOOPS_DB_CHARSET);
+	if ( function_exists('mb_substr') ) $ret=mb_substr($string, 0, $length, XOOPS_DB_CHARSET);
 	else $ret=substr($string, 0, $length);
+	if($ret===false) $ret=(string)$string; // if string is empty things can get stupid
 	return $ret; 
 }
 
