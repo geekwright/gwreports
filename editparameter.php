@@ -65,7 +65,7 @@ $report_name='';
 			$parameter_type=$myrow['parameter_type'];
 			$parameter_decimals=$myrow['parameter_decimals'];
 			$report_id=$myrow['report'];
-			$sqlchoice=$myrow['sqlchoice'];
+			$sqlchoice=$myrow['parameter_sqlchoice'];
 			++$cnt;
 		}
 		if($cnt) {
@@ -134,7 +134,7 @@ if($op=='update') {
 	$sql.=" , parameter_length  =  $parameter_length ";
 	$sql.=" , parameter_type  =  '$parameter_type' ";
 	$sql.=" , parameter_decimals  =  $parameter_decimals ";
-	$sql.=" , sqlchoice  =  '$sl_sqlchoice' ";
+	$sql.=" , parameter_sqlchoice  =  '$sl_sqlchoice' ";
 	$sql.=" WHERE parameter_id = $parameter_id ";
 	$result = $xoopsDB->queryF($sql);
 	if (!$result) {
@@ -189,7 +189,7 @@ $body='';
 
 	$caption = _MD_GWREPORTS_PARAMETER_SQLCHOICE;
 	$sqlfield=new XoopsFormTextArea($caption, 'sqlchoice', $sqlchoice, 4, 50, 'sqlchoice');
-	$sqlfield->setDescription("Use simple sql statement, and fix column as value and label, example:<br/>select uid as value,concat(uid,' - ', uname) as label from xoops_users");
+	$sqlfield->setDescription(_MD_GWREPORTS_PARAMETER_SQLCHOICE_DESC);
 	$form->addElement($sqlfield,false);
 
 

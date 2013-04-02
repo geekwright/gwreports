@@ -198,9 +198,7 @@ define('_MD_GWREPORTS_SECTION_MULTIROW','Section is Multirow');
 define('_MD_GWREPORTS_SECTION_QUERY','SQL Query');
 define('_MD_GWREPORTS_SECTION_SHOWTITLE','Show Section Name');
 define('_MD_GWREPORTS_SECTION_SKIPEMPTY','Supress display if empty');
-//define('','');
-//define('','');
-//define('','');
+
 
 // Parameter Types
 // enum('text','liketext','datetime','integer','yesno')
@@ -211,8 +209,12 @@ define('_MD_GWREPORTS_PARMTYPE_DATE','Date');
 define('_MD_GWREPORTS_PARMTYPE_INTEGER','Integer');
 define('_MD_GWREPORTS_PARMTYPE_DECIMAL','Decimal');
 define('_MD_GWREPORTS_PARMTYPE_YESNO','Yes/No');
-define('_MD_GWREPORTS_PARMTYPE_AUTOCOMPLETE','Auto Complete');
 
 // limited mode messages
 define('_MD_GWREPORTS_DISABLED', 'This function is not available.');
+
+// new in 1.1
+define('_MD_GWREPORTS_PARMTYPE_AUTOCOMPLETE','Auto Complete');
+define('_MD_GWREPORTS_PARAMETER_SQLCHOICE','SQL Query for Auto Complete');
+define('_MD_GWREPORTS_PARAMETER_SQLCHOICE_DESC',"SQL query returning two columns, value and label. For example:<br/>select uid as value, uname as label from {\$xpfx}xoops_users");
 ?>
