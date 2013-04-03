@@ -19,7 +19,11 @@ while($r=$xoopsDB->fetchArray($q)){
 }
 
 if(!($report_id) || $sqlchoice=='') die;
-if(!checkUserReportAccess($report_id)) die;
+// check first for for explicit permission that is part of report, if none, then
+// check for admin. This is needed during report development before rights are assigned
+if(!checkUserReportAccess($report_id)) {
+	if(!($xoopsUser && ($xoopsUser->isAdmin()))) die; 
+}
 
 $parmtags='{$xpfx}';
 $parmsubs=$xoopsDB->prefix('').'_';
