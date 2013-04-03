@@ -5,7 +5,7 @@
 *
 * This file is part of gwreports - geekwright Reports
 *
-* @copyright  Copyright © 2011 geekwright, LLC. All rights reserved. 
+* @copyright  Copyright © 2011-2013 geekwright, LLC. All rights reserved. 
 * @license    gwreports/docs/license.txt  GNU General Public License (GPL)
 * @since      1.0
 * @author     Richard Griffith <richard@geekwright.com>
@@ -13,14 +13,12 @@
 * @version    $Id$
 */
 
-include ('../../../include/cp_header.php');
-include_once "functions.php";
+include 'header.php';
 include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
-include_once ('../include/dbcommon.php');
 
-xoops_cp_header();
-
-adminmenu(3);
+	if(!$xoop25plus) {
+		adminmenu(4);
+	}
 
 	$pathname=XOOPS_TRUST_PATH.'/modules/gwreports/import/';
 	if(!is_dir($pathname)) redirect_header('reports.php', 3, _AD_GWREPORTS_NO_IMPORT_DIR);
@@ -39,10 +37,20 @@ adminmenu(3);
 	$import_file='';
 	if(isset($_POST['import_file'])) {
 		$import_file=$filelist[cleaner($_POST['import_file'])];
+		$check=$GLOBALS['xoopsSecurity']->check();
+		if (!$check) {
+			$op='display';
+			$err_message = _AD_GWREPORTS_BAD_TOKEN;
+			$import_file=''; 
+		}
 	}
 	if($import_file && $import_file!='') {
 		$import = file($pathname.$import_file,FILE_IGNORE_NEW_LINES);
-		if(count($import)>4 && $import[0]=='GWREPORTS EXPORT 1.0' && $import[1]=='REPORT') {
+		$gwreports_export_sig='GWREPORTS EXPORT '; // this is followed by $export_version
+		$have_export_sig=(substr($import[0],0,strlen($gwreports_export_sig))==$gwreports_export_sig);
+		$export_version=substr($import[0],strlen($gwreports_export_sig));
+		if(count($import)>4 && $have_export_sig && $export_version<=1.1 && $import[1]=='REPORT') {
+//			echo '<pre>$import='.print_r($import,true).'</pre>';
 			$line=2;
 			$report_name=dbescape(base64_decode($import[$line++]));
 			$report_description=dbescape(base64_decode($import[$line++]));
@@ -77,10 +85,13 @@ adminmenu(3);
 						$parameter_length = intval($import[$line++]);
 						$parameter_type = dbescape($import[$line++]);
 						$parameter_decimals = intval($import[$line++]);
+						 // sqlchoice added in version 1.1
+						$parameter_sqlchoice='';
+						if($export_version>1.0) $parameter_sqlchoice = dbescape(base64_decode($import[$line++]));
 
 						$sql ='INSERT INTO '.$xoopsDB->prefix('gwreports_parameter');
-						$sql.=' (report, parameter_name, parameter_title, parameter_description, parameter_order, parameter_default, parameter_required, parameter_length, parameter_type, parameter_decimals) ';
-						$sql.=" VALUES ( $report_id, '$parameter_name', '$parameter_title', '$parameter_description', $parameter_order, '$parameter_default', $parameter_required, $parameter_length, '$parameter_type', $parameter_decimals) ";
+						$sql.=' (report, parameter_name, parameter_title, parameter_description, parameter_order, parameter_default, parameter_required, parameter_length, parameter_type, parameter_decimals, parameter_sqlchoice) ';
+						$sql.=" VALUES ( $report_id, '$parameter_name', '$parameter_title', '$parameter_description', $parameter_order, '$parameter_default', $parameter_required, $parameter_length, '$parameter_type', $parameter_decimals, '$parameter_sqlchoice') ";
 
 						$result = $xoopsDB->queryF($sql);
 						if (!$result) {
@@ -152,12 +163,12 @@ adminmenu(3);
 			}
 
 		}
+		else $err_message=_AD_GWREPORTS_AD_IMPORT_BADFILE;
 	}
 
 	if(isset($err_message)) echo '<br /><b>'.$err_message.'</b><br />';
 
-
-	$token=0;
+	$token=true;
 
 	$form = new XoopsThemeForm(_AD_GWREPORTS_AD_IMPORT_FORMNAME, 'form1', '', 'POST', $token);
 
