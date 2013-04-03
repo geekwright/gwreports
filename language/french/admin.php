@@ -95,4 +95,6 @@ define('_AD_GW_ADMENU_HELP', 'Page d\'aide');
 define('_AD_GW_ADMENU_TOADMIN', 'Retour &agrave; l\'administration du module');
 define('_AD_GW_ADMENU_WELCOME', 'Bienvenue sur gwreports!');
 define('_AD_GW_ADMENU_MESSAGE', '<img src="../images/icon_big.png" alt="Logo" style="float:left; margin-right:2em;" /> G&eacute;n&eacute;rateur de rapports');
+
+define('_AD_GWREPORTS_BAD_TOKEN', 'Le jeton de s&eacute;curit&eacute; n\'est pas valide.');
 ?>

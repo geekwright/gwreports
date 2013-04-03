@@ -95,4 +95,6 @@ define('_AD_GW_ADMENU_HELP', 'Help');
 define('_AD_GW_ADMENU_TOADMIN', 'Back to Module Administration');
 define('_AD_GW_ADMENU_WELCOME', 'Welcome to gwreports!');
 define('_AD_GW_ADMENU_MESSAGE', '<img src="../images/icon_big.png" alt="Logo" style="float:left; margin-right:2em;" /> A MySQL Report Generation Tool.');
+
+define('_AD_GWREPORTS_BAD_TOKEN', 'The security token is invalid.');
 ?>
