@@ -1,4 +1,16 @@
 <?php
+/**
+* autocomplete.php - execute auto-completion query for a report parameter
+*
+* This file is part of gwreports - geekwright Reports
+*
+* @copyright  Copyright © 2011-2013 geekwright, LLC. All rights reserved. 
+* @license    GNU General Public License (GPL)
+* @since      1.1
+* @author     KS Tan <kstan@simit.com.my>
+* @package    gwreports
+* @version    $Id$
+*/
 include '../../mainfile.php';
 $xoopsLogger->activated = false; // this corrupts the reading of the json return if left activated with xoops debug on
 
