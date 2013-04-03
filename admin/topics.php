@@ -15,7 +15,9 @@
 include 'header.php';
 include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
 
-	if(!$xoop25plus) {
+	if($xoop25plus) {
+		echo $moduleAdmin->addNavigation('topics.php');
+	} else {
 		adminmenu(3);
 	}
 
