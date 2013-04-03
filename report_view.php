@@ -363,9 +363,9 @@ if ($op=='run') {
 			case "yesno":
 				$parmsubs[$pc]=intval($v['value']);
 		        break;
-			case "autocomplete":
-				$parmsubs[$pc]=$v['value'];
-		        break;
+//			case "autocomplete":		// let default handle this one
+//				$parmsubs[$pc]=$v['value'];
+//		        break;
 			default:
 				$parmsubs[$pc]=dbescape($v['value']);
 		        break;
