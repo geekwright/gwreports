@@ -408,7 +408,7 @@ global $xoopsModuleConfig;
 		        break;
 	 	    case "autocomplete":
 		     	$element=new XoopsFormText($caption, $parm_name, $parm_length, $parm_length, htmlspecialchars($parm_value, ENT_QUOTES));
-		     	$element->setExtra(" class='autocomplete' size='10' autocompleteurl='autocomplete.php?parameter_id=".$v['parameter_id']."'" );
+		     	$element->setExtra(" class='autocomplete' size='10' autocompleteurl='".XOOPS_URL."/modules/gwreports/autocomplete.php?parameter_id=".$v['parameter_id']."'" );
 		    break;
 	
 			default: // text, liketext, int, decimal
