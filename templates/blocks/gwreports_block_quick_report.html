@@ -5,6 +5,7 @@
 <{* link - link to report_view *}>
 <{* form - simple form to run report  *}>
 <{if is_array($block) && count($block) > 0 }>
+<{include file="db:gwreports_autocomplete.html"}>
 <div class="gwrptblockform">
 <{if isset($block.form)}>
 <{$block.form}>

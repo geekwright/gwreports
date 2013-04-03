@@ -186,6 +186,10 @@ function b_gwreports_block_quick_report_show($options) {
 				case "datetime":
 					$element=new XoopsFormDateTime($caption, $parm_name, $parm_length, $parm_value);
 		        	break;
+				case "autocomplete":
+					$element=new XoopsFormText($caption, $parm_name, $parm_length_min, $parm_length, htmlspecialchars($parm_value, ENT_QUOTES));
+					$element->setExtra(" class='autocomplete' size='10' autocompleteurl='".XOOPS_URL."/modules/gwreports/autocomplete.php?parameter_id=".$v['parameter_id']."'" );
+					break;
 				default: // text, liketext, int
 					$element=new XoopsFormText($caption, $parm_name, $parm_length_min, $parm_length, htmlspecialchars($parm_value, ENT_QUOTES));
 		        	break;
