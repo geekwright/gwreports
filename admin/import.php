@@ -30,7 +30,10 @@ include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
 			if (move_uploaded_file($_FILES[$filekey]['tmp_name'], $pathname.$filename)) {
 				$import = file($pathname.$filename,FILE_IGNORE_NEW_LINES);
 				unlink($pathname.$filename);
-				if(count($import)>4 && $import[0]=='GWREPORTS EXPORT 1.0' && $import[1]=='REPORT') {
+				$gwreports_export_sig='GWREPORTS EXPORT '; // this is followed by $export_version
+				$have_export_sig=(substr($import[0],0,strlen($gwreports_export_sig))==$gwreports_export_sig);
+				$export_version=substr($import[0],strlen($gwreports_export_sig));
+				if(count($import)>4 && $have_export_sig && $export_version<=1.1 && $import[1]=='REPORT') {
 //					echo '<pre>$import='.print_r($import,true).'</pre>';
 					$line=2;
 					$report_name=dbescape(base64_decode($import[$line++]));
@@ -66,10 +69,13 @@ include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
 								$parameter_length = intval($import[$line++]);
 								$parameter_type = dbescape($import[$line++]);
 								$parameter_decimals = intval($import[$line++]);
+								 // sqlchoice added in version 1.1
+								$parameter_sqlchoice='';
+								if($export_version>1.0) $parameter_sqlchoice = dbescape(base64_decode($import[$line++]));
 
 								$sql ='INSERT INTO '.$xoopsDB->prefix('gwreports_parameter');
-								$sql.=' (report, parameter_name, parameter_title, parameter_description, parameter_order, parameter_default, parameter_required, parameter_length, parameter_type, parameter_decimals) ';
-								$sql.=" VALUES ( $report_id, '$parameter_name', '$parameter_title', '$parameter_description', $parameter_order, '$parameter_default', $parameter_required, $parameter_length, '$parameter_type', $parameter_decimals) ";
+								$sql.=' (report, parameter_name, parameter_title, parameter_description, parameter_order, parameter_default, parameter_required, parameter_length, parameter_type, parameter_decimals, parameter_sqlchoice) ';
+								$sql.=" VALUES ( $report_id, '$parameter_name', '$parameter_title', '$parameter_description', $parameter_order, '$parameter_default', $parameter_required, $parameter_length, '$parameter_type', $parameter_decimals, '$parameter_sqlchoice') ";
 
 								$result = $xoopsDB->queryF($sql);
 								if (!$result) {

@@ -102,7 +102,7 @@ if(isset($_POST['rid'])) $report_id = intval($_POST['rid']);
 			header('Content-Type: text/plain');
 			header("Content-Disposition: attachment; filename=\"$filename\"");
 
-			echo 'GWREPORTS EXPORT 1.0'.$eol;
+			echo 'GWREPORTS EXPORT 1.1'.$eol;
 
 			echo 'REPORT'.$eol;
 			echo base64_encode($report_name).$eol;
@@ -120,6 +120,7 @@ if(isset($_POST['rid'])) $report_id = intval($_POST['rid']);
 				echo $parm['parameter_length'].$eol;
 				echo $parm['parameter_type'].$eol;
 				echo $parm['parameter_decimals'].$eol;
+				echo base64_encode($parm['parameter_sqlchoice']).$eol;
 			}
 			$sections=getReportSections($report_id);
 			foreach ($sections as $sec) {
