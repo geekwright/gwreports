@@ -218,5 +218,19 @@ define('_MD_GWREPORTS_DISABLED', 'Cette fonction n\est pas disponible.');
 // new in 1.1 -- need verification
 define('_MD_GWREPORTS_PARMTYPE_AUTOCOMPLETE','auto-complétion');
 define('_MD_GWREPORTS_PARAMETER_SQLCHOICE','Requ&ecirc;te SQL pour l\'auto-compl&eacute;tion');
-define('_MD_GWREPORTS_PARAMETER_SQLCHOICE_DESC',"Requ&ecirc;te SQL retournant deux colonnes nomm&eacute;es, value et label. Par exemple:<br/>select uid as value, uname as label from {\$xpfx}xoops_users");
+define('_MD_GWREPORTS_PARAMETER_SQLCHOICE_DESC',"Requ&ecirc;te SQL retournant des valeurs d'auto-compl&eacute;tion en deux colonnes, la valeur et l'&eacute;tiquette. Par exemple:<br/><i>select uid as value, uname as label from {\$xpfx}xoops_users</i>");
+define('_MD_GWREPORTS_SECTION_DATATOOLS', 'Activer les outils de donn&eacute;es?');
+// for jQuery dataTables plugin used in datatools - _XX_ are parameters
+define('_MD_GWREPORTS_JQDT_ALL','Tous');
+define('_MD_GWREPORTS_JQDT_SLENGTHMENU', 'Afficher _MENU_ enregistrements');
+define('_MD_GWREPORTS_JQDT_SSEARCH', 'Filtrer: _INPUT_');
+define('_MD_GWREPORTS_JQDT_SINFO', 'Montrant _START_ &agrave; _END_ de _TOTAL_ enregistrements');
+define('_MD_GWREPORTS_JQDT_SINFOEMPTY', 'Rien &agrave; montrer');
+define('_MD_GWREPORTS_JQDT_SINFOFILTERED', ' (filtr&eacute;e &agrave; partir de _MAX_ enregistrements)');
+define('_MD_GWREPORTS_JQDT_SEMPTYTABLE', 'Pas de donn&eacute;es');
+define('_MD_GWREPORTS_JQDT_SZERORECORDS', 'Pas de dossiers pour montrer');
+define('_MD_GWREPORTS_JQDT_SNEXT', 'Suivant');
+define('_MD_GWREPORTS_JQDT_SPREVIOUS', 'Ant&eacute;rieur');
+define('_MD_GWREPORTS_JQDT_SFIRST', 'Premier');
+define('_MD_GWREPORTS_JQDT_SLAST', 'Dernier');
 ?>

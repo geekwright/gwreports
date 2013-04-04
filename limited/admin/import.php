@@ -106,11 +106,12 @@ include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
 						$section_showtitle = intval($import[$line++]);
 						$section_multirow = intval($import[$line++]);
 						$section_skipempty = intval($import[$line++]);
+						if($export_version>1.0) $section_datatools = intval($import[$line++]);
 						$section_query = dbescape(base64_decode($import[$line++]));
 
 						$sql ='INSERT INTO '.$xoopsDB->prefix('gwreports_section');
-						$sql.=' (report, section_name, section_description, section_order, section_showtitle, section_multirow, section_skipempty, section_query) ';
-						$sql.=" VALUES ( $report_id, '$section_name', '$section_description', $section_order, $section_showtitle, $section_multirow, $section_skipempty, '$section_query') ";
+						$sql.=' (report, section_name, section_description, section_order, section_showtitle, section_multirow, section_skipempty, section_datatools, section_query) ';
+						$sql.=" VALUES ( $report_id, '$section_name', '$section_description', $section_order, $section_showtitle, $section_multirow, $section_skipempty, $section_datatools, '$section_query') ";
 
 						$result = $xoopsDB->queryF($sql);
 						if (!$result) {

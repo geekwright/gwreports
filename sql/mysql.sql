@@ -58,6 +58,7 @@ CREATE TABLE gwreports_section (
   section_showtitle tinyint unsigned NOT NULL default '0',
   section_multirow tinyint unsigned NOT NULL default '1',
   section_skipempty tinyint unsigned NOT NULL default '0',
+  section_datatools tinyint unsigned NOT NULL default '0',
   section_query text NOT NULL,
   PRIMARY KEY (section_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

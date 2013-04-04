@@ -27,7 +27,10 @@ global $xoopsDB;
 		$sql='ALTER TABLE '.$xoopsDB->prefix('gwreports_parameter').' ADD COLUMN parameter_sqlchoice text NOT NULL AFTER parameter_decimals';
 		$xoopsDB->queryF($sql);
 
+		$sql='ALTER TABLE '.$xoopsDB->prefix('gwreports_section').' ADD COLUMN section_datatools tinyint unsigned NOT NULL default \'0\' AFTER section_skipempty';
+		$xoopsDB->queryF($sql);
 	}
+	
     return true;
 }
 

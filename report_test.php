@@ -358,6 +358,7 @@ if ($op=='run') {
 		$section_showtitle=$s['section_showtitle'];
 		$section_multirow=$s['section_multirow'];
 		$section_skipempty=$s['section_skipempty'];
+		$section_datatools=$s['section_datatools'];
 		$section_query=$s['section_query'];
 
 		unset($columns);
@@ -374,7 +375,8 @@ if ($op=='run') {
 				$rowheaders=array();
 				$colcount=initializeColumns($columns, $myrow, $rowheaders);
 				if($section_multirow) {
-					$body.='<table class="dataTable"><tr>';
+					if($section_datatools) $datatool_class=' class="dataTable" ';
+					$body.='<table'.$datatool_class.'><thead><tr>';
 					if($section_showtitle) {
 						$colspan=$colcount;
 						$body.="<th colspan=$colspan>$section_name</th></tr><tr>";
@@ -382,7 +384,7 @@ if ($op=='run') {
 					foreach ($myrow as $col=>$row) {
 						$body.=emitColumnHeader($col, $columns,$section_multirow);
 					}
-					$body.='</tr>';
+					$body.='</tr></thead><tbody>';
 					while($myrow) {
 						$breaktriggered=checkBreak($columns, $myrow);
 						if($breaktriggered) {
@@ -417,7 +419,7 @@ if ($op=='run') {
 					}
 
 				} else { // $section_multirow is false
-					$body.='<table>';
+					$body.='<table><tbody>';
 					if($section_showtitle) {
 						$body.="<tr><th colspan=\"2\">$section_name</th></tr>";
 					}
@@ -436,7 +438,7 @@ if ($op=='run') {
 					}
 				}
 
-				$body.='</table><br />';
+				$body.='</tbody></table><br />';
 			}
 			else { // else no data for section
 				if(!$section_skipempty) {

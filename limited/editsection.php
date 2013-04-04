@@ -39,6 +39,7 @@ $section_description='';
 $section_showtitle=0;
 $section_multirow=1;
 $section_skipempty=0;
+$section_datatools=0;
 $section_query='';
 $report_id=0;
 $report_name='';
@@ -60,6 +61,7 @@ $report_name='';
 			$section_showtitle=$myrow['section_showtitle'];
 			$section_multirow=$myrow['section_multirow'];
 			$section_skipempty=$myrow['section_skipempty'];
+			$section_datatools=$myrow['section_datatools'];
 			$section_query=$myrow['section_query'];
 			$report_id=$myrow['report'];
 			++$cnt;
@@ -120,6 +122,10 @@ $body='';
 	$caption = _MD_GWREPORTS_SECTION_SKIPEMPTY;
 	$showyesno=($section_skipempty ? _YES : _NO);
 	$form->addElement(new XoopsFormLabel($caption, htmlspecialchars($showyesno, ENT_QUOTES), 'section_skipempty'),false);
+
+	$caption = _MD_GWREPORTS_SECTION_DATATOOLS;
+	$showyesno=($section_datatools ? _YES : _NO);
+	$form->addElement(new XoopsFormLabel($caption, htmlspecialchars($showyesno, ENT_QUOTES), 'section_datatools'),false);
 
 	$caption = _MD_GWREPORTS_SECTION_DESC;
 	$form->addElement(new XoopsFormLabel($caption, nl2br(htmlspecialchars($section_description, ENT_QUOTES)), 'section_description'),false);

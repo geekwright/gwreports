@@ -216,5 +216,19 @@ define('_MD_GWREPORTS_DISABLED', 'This function is not available.');
 // new in 1.1
 define('_MD_GWREPORTS_PARMTYPE_AUTOCOMPLETE','Auto Complete');
 define('_MD_GWREPORTS_PARAMETER_SQLCHOICE','SQL Query for Auto Complete');
-define('_MD_GWREPORTS_PARAMETER_SQLCHOICE_DESC',"SQL query returning two columns, value and label. For example:<br/>select uid as value, uname as label from {\$xpfx}xoops_users");
+define('_MD_GWREPORTS_PARAMETER_SQLCHOICE_DESC','SQL query returning the autocomplete values as two columns, value and label. For example:<br/><i>select uid as value, uname as label from {$xpfx}xoops_users</i>');
+define('_MD_GWREPORTS_SECTION_DATATOOLS', 'Enable data tools');
+// for jQuery dataTables plugin used in datatools - _XX_ are parameters
+define('_MD_GWREPORTS_JQDT_ALL','All');
+define('_MD_GWREPORTS_JQDT_SLENGTHMENU', 'Display _MENU_ records');
+define('_MD_GWREPORTS_JQDT_SSEARCH', 'Filter: _INPUT_');
+define('_MD_GWREPORTS_JQDT_SINFO', 'Showing _START_ to _END_ of _TOTAL_ records');
+define('_MD_GWREPORTS_JQDT_SINFOEMPTY', 'Nothing to show');
+define('_MD_GWREPORTS_JQDT_SINFOFILTERED', ' (filtered from _MAX_ records)');
+define('_MD_GWREPORTS_JQDT_SEMPTYTABLE', 'No data');
+define('_MD_GWREPORTS_JQDT_SZERORECORDS', 'No records to show');
+define('_MD_GWREPORTS_JQDT_SNEXT', 'Next');
+define('_MD_GWREPORTS_JQDT_SPREVIOUS', 'Previous');
+define('_MD_GWREPORTS_JQDT_SFIRST', 'First');
+define('_MD_GWREPORTS_JQDT_SLAST', 'Last');
 ?>

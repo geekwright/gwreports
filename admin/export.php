@@ -133,6 +133,7 @@ if(isset($_POST['rid'])) $report_id = intval($_POST['rid']);
 				echo $sec['section_showtitle'].$eol;
 				echo $sec['section_multirow'].$eol;
 				echo $sec['section_skipempty'].$eol;
+				echo $sec['section_datatools'].$eol;
 				echo base64_encode($sec['section_query']).$eol;
 
 				$columns=getColumns($section_id);

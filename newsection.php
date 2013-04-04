@@ -49,6 +49,7 @@ $section_description='';
 $section_showtitle=0;
 $section_multirow=1;
 $section_skipempty=0;
+$section_datatools=0;
 $section_query='';
 
 	if(isset($_POST['section_name'])) $section_name = cleaner($_POST['section_name']);
@@ -57,6 +58,7 @@ $section_query='';
 	if(isset($_POST['section_multirow'])) $section_multirow = cleaneryn($_POST['section_multirow']);
 	if(isset($_POST['section_showtitle'])) $section_showtitle = cleaneryn($_POST['section_showtitle']);
 	if(isset($_POST['section_skipempty'])) $section_skipempty = cleaneryn($_POST['section_skipempty']);
+	if(isset($_POST['section_datatools'])) $section_datatools = cleaneryn($_POST['section_datatools']);
 
 
 if ($op!='display') {
@@ -77,8 +79,8 @@ if($op=='add') {
 	$dbmsg='';
 
 	$sql ='INSERT INTO '.$xoopsDB->prefix('gwreports_section');
-	$sql.=' (report, section_name, section_description, section_showtitle, section_multirow, section_skipempty, section_query) ';
-	$sql.=" VALUES ( $report_id, '$sl_section_name', '$sl_section_description', $section_showtitle, $section_multirow, $section_skipempty, '$sl_section_query') ";
+	$sql.=' (report, section_name, section_description, section_showtitle, section_multirow, section_skipempty, section_datatools, section_query) ';
+	$sql.=" VALUES ( $report_id, '$sl_section_name', '$sl_section_description', $section_showtitle, $section_multirow, $section_skipempty, $section_datatools, '$sl_section_query') ";
 
 	$result = $xoopsDB->queryF($sql);
 	if (!$result) {
@@ -118,6 +120,9 @@ $body='';
 
 	$caption = _MD_GWREPORTS_SECTION_SKIPEMPTY;
 	$form->addElement(new XoopsFormRadioYN($caption, 'section_skipempty', $section_skipempty),true);
+
+	$caption = _MD_GWREPORTS_SECTION_DATATOOLS;
+	$form->addElement(new XoopsFormRadioYN($caption, 'section_datatools', $section_datatools),true);
 
 	$caption = _MD_GWREPORTS_SECTION_DESC;
 	$form->addElement(new XoopsFormTextArea($caption, 'section_description', $section_description, 4, 50, 'section_description'),false);

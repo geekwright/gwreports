@@ -38,6 +38,7 @@ $section_description='';
 $section_showtitle=0;
 $section_multirow=1;
 $section_skipempty=0;
+$section_datatools=0;
 $section_query='';
 $report_id=0;
 $report_name='';
@@ -59,6 +60,7 @@ $report_name='';
 			$section_showtitle=$myrow['section_showtitle'];
 			$section_multirow=$myrow['section_multirow'];
 			$section_skipempty=$myrow['section_skipempty'];
+			$section_datatools=$myrow['section_datatools'];
 			$section_query=$myrow['section_query'];
 			$report_id=$myrow['report'];
 			++$cnt;
@@ -89,6 +91,7 @@ $report_name='';
 	if(isset($_POST['section_multirow'])) $section_multirow = cleaneryn($_POST['section_multirow']);
 	if(isset($_POST['section_showtitle'])) $section_showtitle = cleaneryn($_POST['section_showtitle']);
 	if(isset($_POST['section_skipempty'])) $section_skipempty = cleaneryn($_POST['section_skipempty']);
+	if(isset($_POST['section_datatools'])) $section_datatools = cleaneryn($_POST['section_datatools']);
 
 
 
@@ -116,6 +119,7 @@ if($op=='update') {
 	$sql.=" , section_multirow  =  $section_multirow ";
 	$sql.=" , section_showtitle  =  $section_showtitle ";
 	$sql.=" , section_skipempty  =  $section_skipempty ";
+	$sql.=" , section_datatools  =  $section_datatools ";
 	$sql.=" WHERE section_id = $section_id ";
 	$result = $xoopsDB->queryF($sql);
 	if (!$result) {
@@ -177,6 +181,9 @@ $body='';
 
 	$caption = _MD_GWREPORTS_SECTION_SKIPEMPTY;
 	$form->addElement(new XoopsFormRadioYN($caption, 'section_skipempty', $section_skipempty),true);
+
+	$caption = _MD_GWREPORTS_SECTION_DATATOOLS;
+	$form->addElement(new XoopsFormRadioYN($caption, 'section_datatools', $section_datatools),true);
 
 	$caption = _MD_GWREPORTS_SECTION_DESC;
 	$form->addElement(new XoopsFormTextArea($caption, 'section_description', $section_description, 4, 50, 'section_description'),false);

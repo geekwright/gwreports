@@ -26,15 +26,31 @@
 				$(this).change();
 			}
 			});
-	
-	$(".dataTable").dataTable();
-	
-			$(this).click(function(){
-				$(this).autocomplete("search",$(this).val());
-				$(this).select();
-				});
 
+		});
 
+		$(".dataTable").each(function(index){
+			$(this).dataTable( {
+				"aaSorting": [],
+				"iDisplayLength": 25,
+				"aLengthMenu": [[25, 50, 100, -1], [25, 50, 100, "<{$smarty.const._MD_GWREPORTS_JQDT_ALL}>"]],
+				"sPaginationType": "full_numbers",
+				"oLanguage": {
+					"sLengthMenu": "<{$smarty.const._MD_GWREPORTS_JQDT_SLENGTHMENU}>",
+					"sSearch": "<{$smarty.const._MD_GWREPORTS_JQDT_SSEARCH}>",
+					"sInfo": "<{$smarty.const._MD_GWREPORTS_JQDT_SINFO}>",
+					"sInfoEmpty": "<{$smarty.const._MD_GWREPORTS_JQDT_SINFOEMPTY}>",
+					"sInfoFiltered": "<{$smarty.const._MD_GWREPORTS_JQDT_SINFOFILTERED}>",
+					"sEmptyTable": "<{$smarty.const._MD_GWREPORTS_JQDT_SEMPTYTABLE}>",
+					"sZeroRecords": "<{$smarty.const._MD_GWREPORTS_JQDT_SZERORECORDS}>",
+					"oPaginate": {
+						"sNext": "<{$smarty.const._MD_GWREPORTS_JQDT_SNEXT}>",
+						"sPrevious": "<{$smarty.const._MD_GWREPORTS_JQDT_SPREVIOUS}>",
+						"sFirst": "<{$smarty.const._MD_GWREPORTS_JQDT_SFIRST}>",
+						"sLast": "<{$smarty.const._MD_GWREPORTS_JQDT_SLAST}>"
+					}
+				}
+			});
 		});
 	}
 	$(document).ready(function(){
