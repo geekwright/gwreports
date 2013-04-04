@@ -382,12 +382,12 @@ global $xoopsModuleConfig;
 	$form = new XoopsThemeForm($formtitle, 'parmform', $report_script, 'POST', $token);
 
 	foreach ($parameters as $v) {
-		if($editor) {
-			$caption= '<a href="editparameter.php?pid='.$v['parameter_id'].'">'.$v['parameter_title'].'</a>';
-		} else {
-			$caption=$v['parameter_title'];
-		}
 		$parm_desc=htmlspecialchars($v['parameter_description'], ENT_QUOTES);
+		if($editor) {
+			$caption= '<a href="editparameter.php?pid='.$v['parameter_id'].'" title="'.$parm_desc.'">'.$v['parameter_title'].'</a>';
+		} else {
+			$caption= '<span title="'.$parm_desc.'">'.$v['parameter_title'].'</span>';
+		}
 //		if($parm_desc!='') $caption.=' <img src="images/help.png" title="'.$parm_desc.'" />';
 		$parm_length=$v['parameter_length'];
 		$parm_required=$v['parameter_required'];
