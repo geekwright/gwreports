@@ -94,7 +94,7 @@ $report_name='';
 	if(isset($_POST['parameter_type'])) $parameter_type = cleaner($_POST['parameter_type']);
 	$parameter_type=checkParmType($parmtypes, $parameter_type);
 
-	if(isset($_POST['parameter_sqlchoice'])) $sqlchoice = cleaner($_POST['parameter_sqlchoice']);
+	if(isset($_POST['parameter_sqlchoice'])) $parameter_sqlchoice = cleaner($_POST['parameter_sqlchoice']);
 	if(isset($_POST['parameter_required'])) $parameter_required = cleaneryn($_POST['parameter_required']);
 	if(isset($_POST['parameter_length'])) $parameter_length = abs(intval($_POST['parameter_length']));
 	if($parameter_length==0) $parameter_length=20;
