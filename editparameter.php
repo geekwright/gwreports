@@ -44,6 +44,7 @@ $parameter_required=1;
 $parameter_length=0;
 $parameter_type='text';
 $parameter_decimals=0;
+$parameter_sqlchoice='';
 $report_id=0;
 $report_name='';
 
@@ -65,7 +66,7 @@ $report_name='';
 			$parameter_type=$myrow['parameter_type'];
 			$parameter_decimals=$myrow['parameter_decimals'];
 			$report_id=$myrow['report'];
-			$sqlchoice=$myrow['parameter_sqlchoice'];
+			$parameter_sqlchoice=$myrow['parameter_sqlchoice'];
 			++$cnt;
 		}
 		if($cnt) {
@@ -93,7 +94,7 @@ $report_name='';
 	if(isset($_POST['parameter_type'])) $parameter_type = cleaner($_POST['parameter_type']);
 	$parameter_type=checkParmType($parmtypes, $parameter_type);
 
-	if(isset($_POST['sqlchoice'])) $sqlchoice = cleaner($_POST['sqlchoice']);
+	if(isset($_POST['parameter_sqlchoice'])) $sqlchoice = cleaner($_POST['parameter_sqlchoice']);
 	if(isset($_POST['parameter_required'])) $parameter_required = cleaneryn($_POST['parameter_required']);
 	if(isset($_POST['parameter_length'])) $parameter_length = abs(intval($_POST['parameter_length']));
 	if($parameter_length==0) $parameter_length=20;
@@ -120,7 +121,7 @@ if($op=='update') {
 	$sl_parameter_description=dbescape($parameter_description);
 	$sl_parameter_title=dbescape($parameter_title);
 	$sl_parameter_default=dbescape($parameter_default);
-	$sl_sqlchoice=dbescape($sqlchoice);
+	$sl_parameter_sqlchoice=dbescape($parameter_sqlchoice);
 
 	$dberr=false;
 	$dbmsg='';
@@ -134,7 +135,7 @@ if($op=='update') {
 	$sql.=" , parameter_length  =  $parameter_length ";
 	$sql.=" , parameter_type  =  '$parameter_type' ";
 	$sql.=" , parameter_decimals  =  $parameter_decimals ";
-	$sql.=" , parameter_sqlchoice  =  '$sl_sqlchoice' ";
+	$sql.=" , parameter_sqlchoice  =  '$sl_parameter_sqlchoice' ";
 	$sql.=" WHERE parameter_id = $parameter_id ";
 	$result = $xoopsDB->queryF($sql);
 	if (!$result) {
@@ -187,12 +188,6 @@ $body='';
 	$caption = _MD_GWREPORTS_PARAMETER_DESC;
 	$form->addElement(new XoopsFormTextArea($caption, 'parameter_description', $parameter_description, 4, 50, 'parameter_description'),false);
 
-	$caption = _MD_GWREPORTS_PARAMETER_SQLCHOICE;
-	$sqlfield=new XoopsFormTextArea($caption, 'sqlchoice', $sqlchoice, 4, 50, 'sqlchoice');
-	$sqlfield->setDescription(_MD_GWREPORTS_PARAMETER_SQLCHOICE_DESC);
-	$form->addElement($sqlfield,false);
-
-
 	$caption = _MD_GWREPORTS_PARAMETER_LENGTH;
 	$form->addElement(new XoopsFormText($caption, 'parameter_length', 8 , 8, intval($parameter_length)),true);
 
@@ -205,7 +200,7 @@ $body='';
 	// XoopsFormSelect( string $caption, string $name, [mixed $value = null], [int $size = 1], [bool $multiple = false])
 	$caption = _MD_GWREPORTS_PARAMETER_TYPE;
 	$parmtype_size = count($parmtypes);
-	if($parmtype_size>6) $parmtype_size=6;
+	if($parmtype_size>8) $parmtype_size=8;
 	$listbox = new XoopsFormSelect($caption, 'parameter_type', $parameter_type, $parmtype_size, false);
 	foreach ($parmtypes as $i => $v) {
 		$listbox->addOption($v['parm_value'], $v['parm_display']);
@@ -214,6 +209,11 @@ $body='';
 
 	$caption = _MD_GWREPORTS_PARAMETER_DEFAULT;
 	$form->addElement(new XoopsFormText($caption, 'parameter_default', 25 , 100, $parameter_default),false);
+
+	$caption = _MD_GWREPORTS_PARAMETER_SQLCHOICE;
+	$sqlfield=new XoopsFormTextArea($caption, 'parameter_sqlchoice', $parameter_sqlchoice, 4, 50, 'parameter_sqlchoice');
+	$sqlfield->setDescription(_MD_GWREPORTS_PARAMETER_SQLCHOICE_DESC);
+	$form->addElement($sqlfield,false);
 
 	$caption = _MD_GWREPORTS_EDITPARAMETER_UPD_BUTTON_DSC;
 	$updtray=new XoopsFormElementTray($caption, '');
