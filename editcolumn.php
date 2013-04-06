@@ -42,6 +42,7 @@ $column_is_unixtime=0;
 $column_format='';
 $column_style='';
 $column_extended_format='';
+$this_report_needs_jquery=false;
 
 	if(isset($_GET['cid'])) $column_id = intval($_GET['cid']);
 	if(isset($_POST['cid'])) $column_id = intval($_POST['cid']);
@@ -164,6 +165,7 @@ if ($op=='delete') {
 	$columns=getColumns($section_id);
 	$xoopsTpl->assign('section_columns', $columns);
 	$parameters=getReportParameters($report_id);
+	foreach($parameters as $p) if($p['parameter_type']=='autocomplete') $this_report_needs_jquery=true;
 	$xoopsTpl->assign('report_parameters', $parameters);
 	$report_parameter_form=getParameterForm($report_id,$parameters,$editor=true);
 	$xoopsTpl->assign('report_parameter_form', $report_parameter_form);
@@ -240,6 +242,7 @@ $body.=" | <a href=\"editsection.php?sid=$section_id\">"._MD_GWREPORTS_EDITSECTI
 //$debug.='<pre>$_GET='.print_r($_GET,true).'</pre>';
 
 setPageTitle(_MD_GWREPORTS_EDITCOLUMN_FORM);
+$xoopsTpl->assign('needjquery', $this_report_needs_jquery);
 if(isset($body)) $xoopsTpl->assign('body', $body);
 
 if(isset($message)) $xoopsTpl->assign('message', $message);

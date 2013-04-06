@@ -13,6 +13,10 @@
 */
 include '../../mainfile.php';
 $xoopsLogger->activated = false; // this corrupts the reading of the json return if left activated with xoops debug on
+// provide error logging for our sanity in debugging ajax use (won't see xoops logger)
+//restore_error_handler();
+//error_reporting(-1);
+//trigger_error('autocomplete.php');
 
 //$GLOBALS['xoopsOption']['template_main'] = 'gwreports_reportview.html';
 include(XOOPS_ROOT_PATH."/header.php");

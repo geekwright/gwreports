@@ -43,6 +43,8 @@ $section_query='';
 $report_id=0;
 $report_name='';
 
+$this_report_needs_jquery=false;
+
 	if(isset($_GET['sid'])) $section_id = intval($_GET['sid']);
 	if(isset($_POST['sid'])) $section_id = intval($_POST['sid']);
 
@@ -155,6 +157,7 @@ if ($op=='delete') {
 	$sections=getReportSections($report_id);
 	$xoopsTpl->assign('report_sections', $sections);
 	$parameters=getReportParameters($report_id);
+	foreach($parameters as $p) if($p['parameter_type']=='autocomplete') $this_report_needs_jquery=true;
 	$xoopsTpl->assign('report_parameters', $parameters);
 	$report_parameter_form=getParameterForm($report_id,$parameters,$editor=true);
 	$xoopsTpl->assign('report_parameter_form', $report_parameter_form);
@@ -216,6 +219,7 @@ $columns=getColumns($section_id);
 $xoopsTpl->assign('section_columns', $columns);
 
 setPageTitle(_MD_GWREPORTS_EDITSECTION_FORM);
+$xoopsTpl->assign('needjquery', $this_report_needs_jquery);
 if(isset($body)) $xoopsTpl->assign('body', $body);
 
 if(isset($message)) $xoopsTpl->assign('message', $message);

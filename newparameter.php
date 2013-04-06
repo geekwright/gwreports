@@ -31,6 +31,7 @@ if(isset($_POST['submit'])) {
 
 $report_id=0;
 $report_name='';
+$this_report_needs_jquery=false;
 
 	if(isset($_GET['rid'])) $report_id = intval($_GET['rid']);
 	if(isset($_POST['rid'])) $report_id = intval($_POST['rid']);
@@ -38,6 +39,7 @@ $report_name='';
 	if(isset($report_definition['report_name'])) $report_name = $report_definition['report_name'];
 	else redirect_header('index.php', 3, _MD_GWREPORTS_REPORT_NOTFOUND );
 	$parameters=getReportParameters($report_id);
+	foreach($parameters as $p) if($p['parameter_type']=='autocomplete') $this_report_needs_jquery=true;
 	$xoopsTpl->assign('report_parameters', $parameters);
 	$sections=getReportSections($report_id);
 	$xoopsTpl->assign('report_sections', $sections);
@@ -96,7 +98,7 @@ if($op=='add') {
 
 	$sql ='INSERT INTO '.$xoopsDB->prefix('gwreports_parameter');
 	$sql.=' (report, parameter_name, parameter_description, parameter_title, parameter_default, parameter_required, parameter_length, parameter_type, parameter_decimals, parameter_sqlchoice) ';
-	$sql.=" VALUES ( $report_id, '$sl_parameter_name', '$sl_parameter_description', '$sl_parameter_title', '$sl_parameter_default', $parameter_required, $parameter_length, '$parameter_type', $parameter_decimals, '$parameter_sqlchoice') ";
+	$sql.=" VALUES ( $report_id, '$sl_parameter_name', '$sl_parameter_description', '$sl_parameter_title', '$sl_parameter_default', $parameter_required, $parameter_length, '$parameter_type', $parameter_decimals, '$sl_parameter_sqlchoice') ";
 
 	$result = $xoopsDB->queryF($sql);
 	if (!$result) {
@@ -175,6 +177,7 @@ $body.=" | <a href=\"editreport.php?rid=$report_id\">"._MD_GWREPORTS_EDITREPORT_
 //$debug='<pre>$_POST='.print_r($_POST,true).'</pre>';
 
 setPageTitle(_MD_GWREPORTS_NEWPARAMETER_FORM);
+$xoopsTpl->assign('needjquery', $this_report_needs_jquery);
 if(isset($body)) $xoopsTpl->assign('body', $body);
 
 if(isset($message)) $xoopsTpl->assign('message', $message);

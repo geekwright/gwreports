@@ -98,6 +98,7 @@ function b_gwreports_block_topic_edit($options) {
 function b_gwreports_block_quick_report_show($options) {
 	global $xoopsDB, $xoopsUser, $xoTheme;
 
+	$this_report_needs_jquery=false;
 	$block=null;
 	$ourdir=basename( dirname( dirname( __FILE__ ) ) ) ;
 
@@ -187,6 +188,7 @@ function b_gwreports_block_quick_report_show($options) {
 					$element=new XoopsFormDateTime($caption, $parm_name, $parm_length, $parm_value);
 		        	break;
 				case "autocomplete":
+					$this_report_needs_jquery=true;
 					$element=new XoopsFormText($caption, $parm_name, $parm_length_min, $parm_length, htmlspecialchars($parm_value, ENT_QUOTES));
 					$element->setExtra(" class='autocomplete' size='10' autocompleteurl='".XOOPS_URL."/modules/gwreports/autocomplete.php?parameter_id=".$v['parameter_id']."'" );
 					break;
@@ -205,6 +207,7 @@ function b_gwreports_block_quick_report_show($options) {
 
 		$body=$form->render();
 		$block['form']=$body;
+		$block['needjquery']=$this_report_needs_jquery;
 	}
 
 
@@ -537,6 +540,7 @@ function b_gwreports_block_report_show($options) {
 	}
 if ($rid) { // b_gwreports_
 	$body='';
+	$this_report_needs_jquery=false;
 	$sections=b_gwreports_getReportSections($report_id);
 
 	$parameters=b_gwreports_getReportParameters($report_id);
@@ -615,7 +619,10 @@ if ($rid) { // b_gwreports_
 		$section_showtitle=$s['section_showtitle'];
 		$section_multirow=$s['section_multirow'];
 		$section_skipempty=$s['section_skipempty'];
+		$section_datatools=$s['section_datatools'];
 		$section_query=$s['section_query'];
+
+		if($section_datatools) $this_report_needs_jquery=true;
 
 		unset($columns);
 		$columns=b_gwreports_getColumns($section_id);
@@ -631,7 +638,9 @@ if ($rid) { // b_gwreports_
 				$rowheaders=array();
 				$colcount=b_gwreports_initializeColumns($columns, $myrow, $rowheaders);
 				if($section_multirow) {
-					$body.='<table><tr>';
+					$datatool_class='';
+					if($section_datatools) $datatool_class=' class="dataTable" ';
+					$body.='<table'.$datatool_class.'><thead><tr>';
 					if($section_showtitle) {
 						$colspan=$colcount;
 						$body.="<th colspan=$colspan>$section_name</th></tr><tr>";
@@ -639,7 +648,7 @@ if ($rid) { // b_gwreports_
 					foreach ($myrow as $col=>$row) {
 						$body.=b_gwreports_emitColumnHeader($col, $columns,$section_multirow);
 					}
-					$body.='</tr>';
+					$body.='</tr></thead><tbody>';
 					while($myrow) {
 						$breaktriggered=b_gwreports_checkBreak($columns, $myrow);
 						if($breaktriggered) {
@@ -674,7 +683,7 @@ if ($rid) { // b_gwreports_
 					}
 
 				} else { // $section_multirow is false
-					$body.='<table>';
+					$body.='<table><tbody>';
 					if($section_showtitle) {
 						$body.="<tr><th colspan=\"2\">$section_name</th></tr>";
 					}
@@ -693,7 +702,7 @@ if ($rid) { // b_gwreports_
 					}
 				}
 
-				$body.='</table><br />';
+				$body.='</tbody></table><br />';
 			}
 			else { // else no data for section
 				if(!$section_skipempty) {
@@ -705,7 +714,10 @@ if ($rid) { // b_gwreports_
 		}
 	} // foreach ($sections as $s)
 
-	if($body!='') $block['body']=$body;
+	if($body!='') {
+		$block['body']=$body;
+		$block['needjquery']=$this_report_needs_jquery;
+	}
 }
 
 	return $block;

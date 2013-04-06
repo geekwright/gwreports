@@ -234,6 +234,8 @@ $report_active=0;
 $access_groups=array();
 $report_topic=0;
 
+$this_report_needs_jquery=false;
+
 	if(isset($_GET['rid'])) $report_id = intval($_GET['rid']);
 	if(isset($_POST['rid'])) $report_id = intval($_POST['rid']);
 
@@ -290,6 +292,9 @@ $report_topic=0;
 				$parm_value = intval($parm_value);
 				if($parm_value) $parm_value='1'; else $parm_value='0';
 		        break;
+		    case 'autocomplete':
+				$this_report_needs_jquery=true;
+				// fall through
 			default: // text, liketext, date
 				$parm_value=clipstring($parm_value,$parm_length);
 		        break;
@@ -361,6 +366,8 @@ if ($op=='run') {
 		$section_datatools=$s['section_datatools'];
 		$section_query=$s['section_query'];
 
+		if($section_datatools) $this_report_needs_jquery=true;
+				
 		unset($columns);
 		$columns=getColumns($section_id);
 
@@ -465,6 +472,7 @@ $body.=" | <a href=\"editreport.php?rid=$report_id\">"._MD_GWREPORTS_EDITREPORT_
 //if(isset($rowheaders)) $debug.='<pre>$rowheaders='.print_r($rowheaders,true).'</pre>';
 
 // setPageTitle(_MD_GWREPORTS_EDITSECTION_FORM);
+$xoopsTpl->assign('needjquery', $this_report_needs_jquery);
 if(isset($body)) $xoopsTpl->assign('body', $body);
 
 if(isset($message)) $xoopsTpl->assign('message', $message);

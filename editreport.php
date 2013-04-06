@@ -39,6 +39,8 @@ $report_active=0;
 $access_groups=array();
 $report_topic=0;
 $old_report_topic=0;
+$this_report_needs_jquery=false;
+
 
 	if(isset($_GET['rid'])) $report_id = intval($_GET['rid']);
 	if(isset($_POST['rid'])) $report_id = intval($_POST['rid']);
@@ -65,6 +67,7 @@ $old_report_topic=0;
 			$sections=getReportSections($report_id);
 			$xoopsTpl->assign('report_sections', $sections);
 			$parameters=getReportParameters($report_id);
+			foreach($parameters as $p) if($p['parameter_type']=='autocomplete') $this_report_needs_jquery=true;
 			$xoopsTpl->assign('report_parameters', $parameters);
 			$report_parameter_form=getParameterForm($report_id,$parameters,$editor=true);
 			$xoopsTpl->assign('report_parameter_form', $report_parameter_form);
@@ -300,6 +303,7 @@ if($report_topic) $body.=" | <a href=\"sortreports.php?tid=$report_topic\">"._MD
 //$debug='<pre>$_POST='.print_r($_POST,true).'</pre>';
 
 setPageTitle(_MD_GWREPORTS_EDITREPORT_FORM);
+$xoopsTpl->assign('needjquery', $this_report_needs_jquery);
 if(isset($body)) $xoopsTpl->assign('body', $body);
 
 if(isset($message)) $xoopsTpl->assign('message', $message);

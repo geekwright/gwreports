@@ -29,6 +29,8 @@ if(isset($_POST['submit'])) {
 
 $report_id=0;
 $report_name='';
+$this_report_needs_jquery=false;
+
 
 	if(isset($_GET['rid'])) $report_id = intval($_GET['rid']);
 	if(isset($_POST['rid'])) $report_id = intval($_POST['rid']);
@@ -38,6 +40,7 @@ $report_name='';
 	$xoopsTpl->assign('report_id', $report_id);
 
 	$parameters=getReportParameters($report_id);
+	foreach($parameters as $p) if($p['parameter_type']=='autocomplete') $this_report_needs_jquery=true;
 	$xoopsTpl->assign('report_parameters', $parameters);
 	$sections=getReportSections($report_id);
 	$xoopsTpl->assign('report_sections', $sections);
@@ -142,6 +145,7 @@ $body.=' | <a href="admin/topics.php">'._MD_GWREPORTS_ADMIN_TOPIC.'</a>';
 //$debug='<pre>$_POST='.print_r($_POST,true).'</pre>';
 
 setPageTitle(_MD_GWREPORTS_NEWSECTION_FORM);
+$xoopsTpl->assign('needjquery', $this_report_needs_jquery);
 if(isset($body)) $xoopsTpl->assign('body', $body);
 
 if(isset($message)) $xoopsTpl->assign('message', $message);
