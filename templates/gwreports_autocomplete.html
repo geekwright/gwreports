@@ -1,101 +1,27 @@
+<{if $needjquery}>
 <script>
-if (typeof(window.gwreportsACActivated) == 'undefined') {  
+if (!(document.getElementById('gwreports_ac_dt'))) {
+	var gwrpt_lang_all = "<{$smarty.const._MD_GWREPORTS_JQDT_ALL}>";
+	var gwrpt_lang_slengthmenu = "<{$smarty.const._MD_GWREPORTS_JQDT_SLENGTHMENU}>";
+	var gwrpt_lang_ssearch = "<{$smarty.const._MD_GWREPORTS_JQDT_SSEARCH}>";
+	var gwrpt_lang_sinfo = "<{$smarty.const._MD_GWREPORTS_JQDT_SINFO}>";
+	var gwrpt_lang_sinfoempty = "<{$smarty.const._MD_GWREPORTS_JQDT_SINFOEMPTY}>";
+	var gwrpt_lang_sinfofiltered = "<{$smarty.const._MD_GWREPORTS_JQDT_SINFOFILTERED}>";
+	var gwrpt_lang_semptytable = "<{$smarty.const._MD_GWREPORTS_JQDT_SEMPTYTABLE}>";
+	var gwrpt_lang_szerorecords = "<{$smarty.const._MD_GWREPORTS_JQDT_SZERORECORDS}>";
 
-	var jq = ['<{$xoops_url}>/modules/gwreports/include/jqueryui/jquery-1.9.1.js'];
+	var gwrpt_lang_snext = "<{$smarty.const._MD_GWREPORTS_JQDT_SNEXT}>";
+	var gwrpt_lang_sprevious = "<{$smarty.const._MD_GWREPORTS_JQDT_SPREVIOUS}>";
+	var gwrpt_lang_sfirst = "<{$smarty.const._MD_GWREPORTS_JQDT_SFIRST}>";
+	var gwrpt_lang_slast = "<{$smarty.const._MD_GWREPORTS_JQDT_SLAST}>";
+	var gwrpt_jqurl='<{$xoops_url}>/modules/gwreports/include/jqueryui/';
 
-	var jqui = ['<{$xoops_url}>/modules/gwreports/include/jqueryui/ui/jquery-ui.custom.js'];
-
-	var jqdt = ['<{$xoops_url}>/modules/gwreports/include/jqueryui/ui/jquery.dataTables.js'];
-
-	var jqcssui = [ '<{$xoops_url}>/modules/gwreports/include/jqueryui/themes/base/jquery.ui.all.css'];
-
-	var jqcssdt = [ '<{$xoops_url}>/modules/gwreports/include/jqueryui/themes/base/jquery.dataTables.css'];
-
-	function gwreportsIncludeJs(array,callback){
-		var loader = function(src,handler){
-			var script = document.createElement("script");
-				script.src = src;
-				script.onload = script.onreadystatechange = function(){
-					script.onreadystatechange = script.onload = null;
-					handler();
-				}
-			var head = document.getElementsByTagName("head")[0];
-			(head || document.body).appendChild( script );
-		};
-		(function(){
-			if(array.length!=0){
-				loader(array.shift(),arguments.callee);
-			}else{
-				callback && callback();
-			}
-		})();
-	}
-
-	function gwreportsIncludeStyle(cssFilePath) {
-		cssFilePath.forEach(function(element) {
-			var css = document.createElement("link");
-			css.type = "text/css";
-			css.rel = "stylesheet";
-			css.href = element;
-			document.body.appendChild(css);
-		});
-	}
-
-	function gwreportsActivateAutoComplete(){
-		window.gwreportsACActivated=true;
-		
-		try {
-			$ourjq(".autocomplete").each(function(index){
-				link=$(this).attr('autocompleteurl');
-				$ourjq(this).autocomplete({
-					source:link,
-					minLength: 2,
-					delay: 400,
-					autoFocus:true,		
-					select: function( event, ui ) {				
-						$ourjq(this).change();
-					}
-				});
-			});
-		}
-		catch(err) { return; }
-		try {
-			$(".dataTable").each(function(index){
-				$ourjq(this).dataTable( {
-					"aaSorting": [],
-					"iDisplayLength": 20,
-					"aLengthMenu": [[20, 50, 100, -1], [20, 50, 100, "<{$smarty.const._MD_GWREPORTS_JQDT_ALL}>"]],
-					"sPaginationType": "full_numbers",
-					"oLanguage": {
-						"sLengthMenu": "<{$smarty.const._MD_GWREPORTS_JQDT_SLENGTHMENU}>",
-						"sSearch": "<{$smarty.const._MD_GWREPORTS_JQDT_SSEARCH}>",
-						"sInfo": "<{$smarty.const._MD_GWREPORTS_JQDT_SINFO}>",
-						"sInfoEmpty": "<{$smarty.const._MD_GWREPORTS_JQDT_SINFOEMPTY}>",
-						"sInfoFiltered": "<{$smarty.const._MD_GWREPORTS_JQDT_SINFOFILTERED}>",
-						"sEmptyTable": "<{$smarty.const._MD_GWREPORTS_JQDT_SEMPTYTABLE}>",
-						"sZeroRecords": "<{$smarty.const._MD_GWREPORTS_JQDT_SZERORECORDS}>",
-						"oPaginate": {
-							"sNext": "<{$smarty.const._MD_GWREPORTS_JQDT_SNEXT}>",
-							"sPrevious": "<{$smarty.const._MD_GWREPORTS_JQDT_SPREVIOUS}>",
-							"sFirst": "<{$smarty.const._MD_GWREPORTS_JQDT_SFIRST}>",
-							"sLast": "<{$smarty.const._MD_GWREPORTS_JQDT_SLAST}>"
-						}
-					}
-				});
-			});
-		}
-		catch(err) { return; }
-
-	}
-
-	var $ourjq;
-	gwreportsIncludeStyle(jqcssui.concat(jqcssdt));
-	gwreportsIncludeJs(jq.concat(jqui,jqdt), function(){ 
-			$ourjq = jQuery.noConflict(true);
-//			$ourjq(document).ready(function(){
-				gwreportsActivateAutoComplete();
-//			}); 
-		});
-
+	var head = document.getElementsByTagName('head')[0]
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.src = '<{$xoops_url}>/modules/gwreports/include/gwreports_ac_dt.js';
+	script.id = 'gwreports_ac_dt';
+	head.appendChild(script);
 }
 </script>
+<{/if}>
