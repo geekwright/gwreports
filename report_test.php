@@ -382,6 +382,7 @@ if ($op=='run') {
 				$rowheaders=array();
 				$colcount=initializeColumns($columns, $myrow, $rowheaders);
 				if($section_multirow) {
+					$datatool_class='';
 					if($section_datatools) $datatool_class=' class="dataTable" ';
 					$body.='<table'.$datatool_class.'><thead><tr>';
 					if($section_showtitle) {
