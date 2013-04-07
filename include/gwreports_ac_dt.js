@@ -28,13 +28,13 @@ if (typeof(window.gwreportsACActivated) == 'undefined') {
 	}
 
 	function gwreportsIncludeStyle(cssFilePath) {
-		cssFilePath.forEach(function(element) {
+		for (var i = 0; i < cssFilePath.length; i++) {
 			var css = document.createElement("link");
 			css.type = "text/css";
 			css.rel = "stylesheet";
-			css.href = element;
+			css.href = cssFilePath[i];
 			document.body.appendChild(css);
-		});
+		};
 	}
 
 	function gwreportsActivateAutoComplete(){
