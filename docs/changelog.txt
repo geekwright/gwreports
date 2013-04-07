@@ -5,7 +5,7 @@ Release date: 2013-04-01
 
 * bug fixes
 * French language files provided by Philippe Masson
-* Auto Complete parameter type by kstan
+* Auto Complete parameters and Data Tools features (started by KS Tan)
 * XOOPS Blue Move and ModuleAdmin compatibility 
 
 === gwreports Module 1.0 ===

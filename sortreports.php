@@ -1,6 +1,6 @@
 <?php
 /**
-* sortreportss.php - change display order of reports within a topic
+* sortreports.php - change display order of reports within a topic
 *
 * This file is part of gwreports - geekwright Reports
 *
