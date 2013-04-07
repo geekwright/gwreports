@@ -1,11 +1,11 @@
 <?php
 /**
 * editsection.php - edit a report section
-*     limited mode version cannot add or modify section definition or sql
+*     limited mode version cannot modify section sql
 *
 * This file is part of gwreports - geekwright Reports
 *
-* @copyright  Copyright © 2011 geekwright, LLC. All rights reserved. 
+* @copyright  Copyright © 2011-2013 geekwright, LLC. All rights reserved. 
 * @license    gwreports/docs/license.txt  GNU General Public License (GPL)
 * @since      1.0
 * @author     Richard Griffith <richard@geekwright.com>
@@ -43,6 +43,8 @@ $section_datatools=0;
 $section_query='';
 $report_id=0;
 $report_name='';
+
+$this_report_needs_jquery=false;
 
 	if(isset($_GET['sid'])) $section_id = intval($_GET['sid']);
 	if(isset($_POST['sid'])) $section_id = intval($_POST['sid']);
@@ -86,49 +88,120 @@ $report_name='';
 
 	if($report_id==0) redirect_header('newreport.php', 3, $err_message);
 
-	$op='display';
+	if(isset($_POST['section_name'])) $section_name = cleaner($_POST['section_name']);
+	if(isset($_POST['section_description'])) $section_description = cleaner($_POST['section_description']);
+//	if(isset($_POST['section_query'])) $section_query = cleaner($_POST['section_query'],true);
+	if(isset($_POST['section_multirow'])) $section_multirow = cleaneryn($_POST['section_multirow']);
+	if(isset($_POST['section_showtitle'])) $section_showtitle = cleaneryn($_POST['section_showtitle']);
+	if(isset($_POST['section_skipempty'])) $section_skipempty = cleaneryn($_POST['section_skipempty']);
+	if(isset($_POST['section_datatools'])) $section_datatools = cleaneryn($_POST['section_datatools']);
+
+
+
+if ($op!='display') {
+	$check=$GLOBALS['xoopsSecurity']->check();
+
+	if (!$check) {
+		$op='display';
+		$err_message = _MD_GWREPORTS_MSG_BAD_TOKEN;
+	}
+}
+
+if($op=='update') {
+	$sl_section_name=dbescape($section_name);
+	$sl_section_description=dbescape($section_description);
+	//$sl_section_query=dbescape($section_query);
+
+	$dberr=false;
+	$dbmsg='';
+
+	$sql ='UPDATE '.$xoopsDB->prefix('gwreports_section');
+	$sql.=" SET section_name   =  '$sl_section_name' ";
+	$sql.=" , section_description  =  '$sl_section_description' ";
+//	$sql.=" , section_query  =  '$sl_section_query' ";
+	$sql.=" , section_multirow  =  $section_multirow ";
+	$sql.=" , section_showtitle  =  $section_showtitle ";
+	$sql.=" , section_skipempty  =  $section_skipempty ";
+	$sql.=" , section_datatools  =  $section_datatools ";
+	$sql.=" WHERE section_id = $section_id ";
+	$result = $xoopsDB->queryF($sql);
+	if (!$result) {
+		$dberr=true;
+		$dbmsg=formatDBError();
+	}
+
+	if(!$dberr) {
+		$message = _MD_GWREPORTS_SECTION_UPD_OK;
+//		redirect_header("editsection.php?sid=$section_id", 3, $message);
+	}
+	else {
+		$err_message = _MD_GWREPORTS_SECTION_UPD_ERR .' '.$dbmsg;
+	}
+}
+
+/*
+if ($op=='delete') {
+		$sql='DELETE  FROM '.$xoopsDB->prefix('gwreports_column');
+		$sql.=" WHERE section = $section_id ";
+		$result = $xoopsDB->queryF($sql);
+
+		$sql='DELETE  FROM '.$xoopsDB->prefix('gwreports_section');
+		$sql.=" WHERE section_id = $section_id ";
+		$result = $xoopsDB->queryF($sql);
+
+		$message = _MD_GWREPORTS_SECTION_DELETED;
+		redirect_header("editreport.php?rid=$report_id", 3, $message);
+}
+*/
 
 // load related data for presentation
 	$xoopsTpl->assign('section_id', $section_id);
 	$sections=getReportSections($report_id);
 	$xoopsTpl->assign('report_sections', $sections);
 	$parameters=getReportParameters($report_id);
+	foreach($parameters as $p) if($p['parameter_type']=='autocomplete') $this_report_needs_jquery=true;
 	$xoopsTpl->assign('report_parameters', $parameters);
 	$report_parameter_form=getParameterForm($report_id,$parameters,$editor=true);
 	$xoopsTpl->assign('report_parameter_form', $report_parameter_form);
 
 $body='';
 	$token=true;
-	$formtitle=_MD_GWREPORTS_EDITSECTION_LIMITED_FORM;
+	$formtitle=_MD_GWREPORTS_EDITSECTION_FORM;
 	$form = new XoopsThemeForm($formtitle, 'form1', 'editsection.php', 'POST', $token);
 
 	$caption = _MD_GWREPORTS_SECTION_REPORT_NAME;
 	$form->addElement(new XoopsFormLabel($caption, '<a href="editreport.php?rid='.$report_id.'">'.$report_name.'</a>', 'report_name'),false);
 
 	$caption = _MD_GWREPORTS_SECTION_NAME;
-	$form->addElement(new XoopsFormLabel($caption, htmlspecialchars($section_name, ENT_QUOTES), 'section_name'),false);
+	$form->addElement(new XoopsFormText($caption, 'section_name', 40, 250, htmlspecialchars($section_name, ENT_QUOTES)),true);
 
 	$caption = _MD_GWREPORTS_SECTION_QUERY;
 	$form->addElement(new XoopsFormLabel($caption, nl2br(htmlspecialchars($section_query, ENT_QUOTES)), 'section_query'),false);
 
 	$caption = _MD_GWREPORTS_SECTION_SHOWTITLE;
-	$showyesno=($section_showtitle ? _YES : _NO);
-	$form->addElement(new XoopsFormLabel($caption, htmlspecialchars($showyesno, ENT_QUOTES), 'section_showtitle'),false);
+	$form->addElement(new XoopsFormRadioYN($caption, 'section_showtitle', $section_showtitle),true);
 
 	$caption = _MD_GWREPORTS_SECTION_MULTIROW;
-	$showyesno=($section_multirow ? _YES : _NO);
-	$form->addElement(new XoopsFormLabel($caption, htmlspecialchars($showyesno, ENT_QUOTES), 'section_multirow'),false);
+	$form->addElement(new XoopsFormRadioYN($caption, 'section_multirow', $section_multirow),true);
 
 	$caption = _MD_GWREPORTS_SECTION_SKIPEMPTY;
-	$showyesno=($section_skipempty ? _YES : _NO);
-	$form->addElement(new XoopsFormLabel($caption, htmlspecialchars($showyesno, ENT_QUOTES), 'section_skipempty'),false);
+	$form->addElement(new XoopsFormRadioYN($caption, 'section_skipempty', $section_skipempty),true);
 
 	$caption = _MD_GWREPORTS_SECTION_DATATOOLS;
-	$showyesno=($section_datatools ? _YES : _NO);
-	$form->addElement(new XoopsFormLabel($caption, htmlspecialchars($showyesno, ENT_QUOTES), 'section_datatools'),false);
+	$form->addElement(new XoopsFormRadioYN($caption, 'section_datatools', $section_datatools),true);
 
 	$caption = _MD_GWREPORTS_SECTION_DESC;
-	$form->addElement(new XoopsFormLabel($caption, nl2br(htmlspecialchars($section_description, ENT_QUOTES)), 'section_description'),false);
+	$form->addElement(new XoopsFormTextArea($caption, 'section_description', $section_description, 4, 50, 'section_description'),false);
+
+	$caption = _MD_GWREPORTS_EDITSECTION_UPD_BUTTON_DSC;
+	$updtray=new XoopsFormElementTray($caption, '');
+
+	$updtray->addElement(new XoopsFormButton('', 'update', _MD_GWREPORTS_EDITSECTION_UPD_BUTTON, 'submit'));
+
+//	$delbtn=new XoopsFormButton('', 'delete', _MD_GWREPORTS_EDITSECTION_DEL_BUTTON, 'submit');
+//	$delbtn->setExtra('onClick=\'this.form.target = "_self";return confirm("'._MD_GWREPORTS_EDITSECTION_DEL_CONFIRM.'")\'');
+//	$updtray->addElement($delbtn);
+	$form->addElement($updtray);
 
 	$form->addElement(new XoopsFormHidden('sid', $section_id));
 
@@ -147,7 +220,8 @@ $body.=" | <a href=\"editreport.php?rid=$report_id\">"._MD_GWREPORTS_EDITREPORT_
 $columns=getColumns($section_id);
 $xoopsTpl->assign('section_columns', $columns);
 
-setPageTitle(_MD_GWREPORTS_EDITSECTION_LIMITED_FORM);
+setPageTitle(_MD_GWREPORTS_EDITSECTION_FORM);
+$xoopsTpl->assign('needjquery', $this_report_needs_jquery);
 if(isset($body)) $xoopsTpl->assign('body', $body);
 
 if(isset($message)) $xoopsTpl->assign('message', $message);

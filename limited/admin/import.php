@@ -21,7 +21,7 @@ include_once XOOPS_ROOT_PATH."/class/xoopsformloader.php";
 	}
 
 	$pathname=XOOPS_TRUST_PATH.'/modules/gwreports/import/';
-	if(!is_dir($pathname)) redirect_header('reports.php', 3, _AD_GWREPORTS_NO_IMPORT_DIR);
+	if(!is_dir($pathname)) redirect_header('reports.php', 3, sprintf(_AD_GWREPORTS_NO_IMPORT_DIR,$pathname));
 	$files=glob($pathname.'*');
 	$filelist=array();
 	if(is_array($files) && count($files) > 0) {
