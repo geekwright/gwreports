@@ -31,9 +31,12 @@ $todocnt = 0;
 
 $op='';
 
-if(defined("_MI_GWREPORTS_AD_LIMITED")) {
+if(defined('_MI_GWREPORTS_AD_LIMITED')) {
 	$pathname=XOOPS_TRUST_PATH.'/modules/gwreports/import/';
-	if($xoop25plus) $moduleAdmin->addConfigBoxLine($pathname, 'folder');
+	if($xoop25plus) {
+		$moduleAdmin->addConfigBoxLine('<img src="../images/admin/warn.png" alt="!" />'._AD_GWREPORTS_LIMITED_MODE, 'default');
+		$moduleAdmin->addConfigBoxLine($pathname, 'folder');
+	}
 	else {
 		if(!is_dir($pathname))  {
 			++$todocnt;
