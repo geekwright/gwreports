@@ -28,7 +28,7 @@ $modversion['dirname'] = basename( dirname( __FILE__ ) ) ;
 // things for ModuleAdmin() class
 $modversion['license_url'] = XOOPS_URL.'/modules/gwreports/docs/license.txt';
 $modversion['license_url'] = substr($modversion['license_url'],strpos($modversion['license_url'],'//')+2);
-$modversion['release_date']     = '2013/04/07';
+$modversion['release_date']     = '2013/04/09';
 $modversion['module_website_url'] = 'geekwright.com';
 $modversion['module_website_name'] = 'geekwright, LLC';
 $modversion['module_status'] = "RC";

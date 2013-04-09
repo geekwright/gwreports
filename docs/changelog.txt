@@ -1,7 +1,7 @@
 gwreports ChangeLog
 
 === gwreports Module 1.1 RC ===
-Release date: 2013-04-07
+Release date: 2013-04-09
 
 * bug fixes
 * French language files provided by Philippe Masson
