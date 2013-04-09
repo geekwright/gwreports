@@ -1,7 +1,6 @@
-if (typeof(window.gwreportsACActivated) == 'undefined') {  
 
-	var jq = [	gwrpt_jqurl+'jquery-1.9.1.js',
-				gwrpt_jqurl+'ui/jquery-ui.custom.js',
+	var jq = [	gwrpt_jqurl+'jquery-1.9.1.js' ];
+	var jqui = [ gwrpt_jqurl+'ui/jquery-ui.custom.js',
 				gwrpt_jqurl+'ui/jquery.dataTables.js'];
 
 	var jqcss = [ gwrpt_jqurl+'themes/base/jquery.ui.all.css',
@@ -9,22 +8,25 @@ if (typeof(window.gwreportsACActivated) == 'undefined') {
 
 	function gwreportsIncludeJs(array,callback){
 		var loader = function(src,handler){
+			var done=false;
 			var script = document.createElement("script");
-				script.src = src;
-				script.onload = script.onreadystatechange = function(){
-					script.onreadystatechange = script.onload = null;
-					handler();
-				}
-			var head = document.getElementsByTagName("head")[0];
-			(head || document.body).appendChild( script );
+			script.src = src;
+			script.onload = script.onreadystatechange = function () {
+					if ( !done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") ) {
+						done = true;
+						handler(); //execute
+					}
+			};
+			document.getElementsByTagName("head")[0].appendChild(script);
 		};
-		(function(){
+		var handler = function(){
 			if(array.length!=0){
-				loader(array.shift(),arguments.callee);
+				loader(array.shift(),handler);
 			}else{
 				callback && callback();
 			}
-		})();
+		};
+		handler();
 	}
 
 	function gwreportsIncludeStyle(cssFilePath) {
@@ -92,8 +94,9 @@ if (typeof(window.gwreportsACActivated) == 'undefined') {
 //	window.onload = function() {
 //		gwreportsActivateAutoComplete();
 //	};
+if (typeof(window.gwreportsACActivated) == 'undefined') { 
 	var $ourjq=null;
-	gwreportsIncludeJs(jq, function(){ 
+	gwreportsIncludeJs(jq.concat(jqui), function(){ 
 			gwreportsIncludeStyle(jqcss);
 			$(document).ready(function(){
 				if($ourjq==null) $ourjq = jQuery.noConflict(true);
