@@ -1,6 +1,8 @@
 <?php
 // @version    $Id: modinfo.php 10 2011-05-12 22:42:27Z rgriffith $
-if (!defined("XOOPS_ROOT_PATH")) die("Root path not defined");
+if (!defined("XOOPS_ROOT_PATH")) {
+    die("Root path not defined");
+}
 // Module Info
 
 // The name and description of module
@@ -33,4 +35,3 @@ define("_MI_GWREPORTS_AD_EXPLORE", "Explorer");
 
 // new in 1.1 - need verification
 define("_MI_GWREPORTS_AD_ABOUT", "A propos");
-?>

@@ -1,6 +1,8 @@
 <?php
 // @version    $Id$
-if (!defined("XOOPS_ROOT_PATH")) die("Root path not defined");
+if (!defined("XOOPS_ROOT_PATH")) {
+    die("Root path not defined");
+}
 // Module Info
 
 // The name and description of module
@@ -33,4 +35,3 @@ define("_MI_GWREPORTS_AD_EXPLORE", "Explore");
 
 // new in 1.1
 define("_MI_GWREPORTS_AD_ABOUT", "About");
-?>

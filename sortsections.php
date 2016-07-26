@@ -4,7 +4,7 @@
 *
 * This file is part of gwreports - geekwright Reports
 *
-* @copyright  Copyright © 2011 geekwright, LLC. All rights reserved. 
+* @copyright  Copyright © 2011 geekwright, LLC. All rights reserved.
 * @license    gwreports/docs/license.txt  GNU General Public License (GPL)
 * @since      1.0
 * @author     Richard Griffith <richard@geekwright.com>
@@ -15,9 +15,9 @@
 include '../../mainfile.php';
 $GLOBALS['xoopsOption']['template_main'] = 'gwreports_index.html';
 include(XOOPS_ROOT_PATH.'/header.php');
-$currentscript=basename( __FILE__ ) ;
+$currentscript=basename(__FILE__) ;
 //include_once XOOPS_ROOT_PATH.'/class/xoopsformloader.php';
-include ('include/common.php');
+include('include/common.php');
 
 $selectalert=_MD_GWREPORTS_SORT_SECTION_SELECT;
 $sortelement='sortelement';
@@ -25,7 +25,7 @@ $sort_js = <<<ENDJSCODE
 function move(f,bDir) {
   var el = f.elements["$sortelement"]
   var idx = el.selectedIndex
-  if (idx==-1) 
+  if (idx==-1)
     alert("$selectalert")
   else {
     var nxidx = idx+( bDir? -1 : 1)
@@ -59,7 +59,7 @@ function reverseorder(f) {
 }
 
 function processForm(f) {
-  for (var i=0;i<f.length;i++) {	
+  for (var i=0;i<f.length;i++) {
     var el = f[i]
     // If reorder listbox, then generate value for hidden field
     if (el.name=="$sortelement") {
@@ -72,59 +72,65 @@ function processForm(f) {
 }
 ENDJSCODE;
 
-$xoTheme->addScript( null, array( 'type' => 'text/javascript' ), $sort_js );
+$xoTheme->addScript(null, array( 'type' => 'text/javascript' ), $sort_js);
 
 // leave if we don't have admin authority
-if(!($xoopsUser && ($xoopsUser->isAdmin()))) {
-	redirect_header('index.php', 3, _NOPERM);
+if (!($xoopsUser && ($xoopsUser->isAdmin()))) {
+    redirect_header('index.php', 3, _NOPERM);
 }
 
 $op='display';
-if(isset($_POST['submit'])) {
-	$op='update';
+if (isset($_POST['submit'])) {
+    $op='update';
 }
 $report_id=0;
-if(isset($_GET['rid'])) $report_id = intval($_GET['rid']);
-if(isset($_POST['rid'])) $report_id = intval($_POST['rid']);
+if (isset($_GET['rid'])) {
+    $report_id = intval($_GET['rid']);
+}
+if (isset($_POST['rid'])) {
+    $report_id = intval($_POST['rid']);
+}
 
-if(!$report_id) {
-	redirect_header("index.php", 3, _MD_GWREPORTS_MISSING_PARAMETER);
+if (!$report_id) {
+    redirect_header("index.php", 3, _MD_GWREPORTS_MISSING_PARAMETER);
 }
 
 $sections=getReportSections($report_id);
 
 // leave if there is nothing to sort
-if(count($sections)<2) {
-	redirect_header("editreport.php?rid=$report_id", 3, _MD_GWREPORTS_SORT_EMPTY);
+if (count($sections)<2) {
+    redirect_header("editreport.php?rid=$report_id", 3, _MD_GWREPORTS_SORT_EMPTY);
 }
 
-if($op=='update') {
-	if(isset($_POST['neworder'])) {
-		$neworder=array();
-		$neworder=explode(',',$_POST['neworder']);
-	}
-	else $op='display';
+if ($op=='update') {
+    if (isset($_POST['neworder'])) {
+        $neworder=array();
+        $neworder=explode(',', $_POST['neworder']);
+    } else {
+        $op='display';
+    }
 }
 
-if($op=='update') {
-	foreach ($neworder as $i => $section) {
-		if(isset($sections[$section])) {
-			$sections[$section]['section_order'] = $i;
-		}
-		else $op='display';
-	}
+if ($op=='update') {
+    foreach ($neworder as $i => $section) {
+        if (isset($sections[$section])) {
+            $sections[$section]['section_order'] = $i;
+        } else {
+            $op='display';
+        }
+    }
 }
 
-if($op=='update') {
-	foreach ($sections as $i => $v) {
-		$sql ='UPDATE '.$xoopsDB->prefix('gwreports_section');
-		$sql.=' SET section_order = '.$v['section_order'];
-		$sql.=' WHERE section_id = '. $v['section_id']. ' ';
-		$result = $xoopsDB->queryF($sql);
-		}
-	unset($sections);
-	$sections=getReportSections($report_id);
-	$op='display';
+if ($op=='update') {
+    foreach ($sections as $i => $v) {
+        $sql ='UPDATE '.$xoopsDB->prefix('gwreports_section');
+        $sql.=' SET section_order = '.$v['section_order'];
+        $sql.=' WHERE section_id = '. $v['section_id']. ' ';
+        $result = $xoopsDB->queryF($sql);
+    }
+    unset($sections);
+    $sections=getReportSections($report_id);
+    $op='display';
 }
 
 $token=0;
@@ -156,7 +162,7 @@ $form->addElement($buttontray);
 // XoopsFormSelect( string $caption, string $name, [mixed $value = null], [int $size = 1], [bool $multiple = false])
 $listbox = new XoopsFormSelect(_MD_GWREPORTS_SORT_SECTIONS, 'sortelement', null, count($sections), false);
 foreach ($sections as $i => $v) {
-	$listbox->addOption($i, $v['section_name']);
+    $listbox->addOption($i, $v['section_name']);
 }
 $form->addElement($listbox);
 
@@ -178,14 +184,25 @@ $body.=" | <a href=\"editreport.php?rid=$report_id\">"._MD_GWREPORTS_EDITREPORT_
 
 setPageTitle(_MD_GWREPORTS_SORT_SECTION_FORM);
 
-if(isset($body)) $xoopsTpl->assign('body', $body);
+if (isset($body)) {
+    $xoopsTpl->assign('body', $body);
+}
 
-if(isset($places['choose'])) $xoopsTpl->assign('choose',$places['choose']);
-if(isset($places['crumbs'])) $xoopsTpl->assign('crumbs',$places['crumbs']);
+if (isset($places['choose'])) {
+    $xoopsTpl->assign('choose', $places['choose']);
+}
+if (isset($places['crumbs'])) {
+    $xoopsTpl->assign('crumbs', $places['crumbs']);
+}
 
-if(isset($message)) $xoopsTpl->assign('message', $message);
-if(isset($err_message)) $xoopsTpl->assign('err_message', $err_message);
-if(isset($debug)) $xoopsTpl->assign('debug', $debug);
+if (isset($message)) {
+    $xoopsTpl->assign('message', $message);
+}
+if (isset($err_message)) {
+    $xoopsTpl->assign('err_message', $err_message);
+}
+if (isset($debug)) {
+    $xoopsTpl->assign('debug', $debug);
+}
 
 include(XOOPS_ROOT_PATH.'/footer.php');
-?>

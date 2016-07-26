@@ -1,6 +1,8 @@
 <?php
 // @version    $Id$
-if (!defined("XOOPS_ROOT_PATH")) die("Root path not defined");
+if (!defined("XOOPS_ROOT_PATH")) {
+    die("Root path not defined");
+}
 // Admin constants
 
 // Admin Menu
@@ -12,7 +14,7 @@ define('_AD_GWREPORTS_ADMENU_ABOUT', 'About');
 define("_AD_GWREPORTS_ADMENU_PREF", "Preferences");
 define("_AD_GWREPORTS_ADMENU_GOMOD", "Go To Module");
 if (!defined("_MI_GWREPORTS_ADMENU")) {
-@include_once dirname(__FILE__) . '/modinfo.php';
+    @include_once dirname(__FILE__) . '/modinfo.php';
 }
 
 
@@ -97,4 +99,3 @@ define('_AD_GW_ADMENU_WELCOME', 'Welcome to gwreports!');
 define('_AD_GW_ADMENU_MESSAGE', '<img src="../images/icon_big.png" alt="Logo" style="float:left; margin-right:2em;" /> A MySQL Report Generation Tool.');
 
 define('_AD_GWREPORTS_BAD_TOKEN', 'The security token is invalid.');
-?>

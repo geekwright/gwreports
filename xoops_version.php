@@ -4,14 +4,16 @@
 *
 * This file is part of gwreports - geekwright Reports
 *
-* @copyright  Copyright © 2011-2013 geekwright, LLC. All rights reserved. 
+* @copyright  Copyright © 2011-2013 geekwright, LLC. All rights reserved.
 * @license    gwreports/docs/license.txt  GNU General Public License (GPL)
 * @since      1.0
 * @author     Richard Griffith <richard@geekwright.com>
 * @package    gwreports
 * @version    $Id$
 */
-if (!defined("XOOPS_ROOT_PATH")) die("Root path not defined");
+if (!defined("XOOPS_ROOT_PATH")) {
+    die("Root path not defined");
+}
 
 $modversion['name'] = _MI_GWREPORTS_NAME;
 $modversion['version'] = '1.1';
@@ -21,13 +23,16 @@ $modversion['credits'] = "Initial autocomplete and dataTables added by KS Tan, F
 $modversion['help'] = "";
 $modversion['license'] = "GPL V2";
 $modversion['official'] = 0;
-if (defined("ICMS_ROOT_PATH")) $modversion['image'] = "images/icon_big.png";
-else $modversion['image'] = "images/icon.png";
-$modversion['dirname'] = basename( dirname( __FILE__ ) ) ;
+if (defined("ICMS_ROOT_PATH")) {
+    $modversion['image'] = "images/icon_big.png";
+} else {
+    $modversion['image'] = "images/icon.png";
+}
+$modversion['dirname'] = basename(dirname(__FILE__)) ;
 
 // things for ModuleAdmin() class
 $modversion['license_url'] = XOOPS_URL.'/modules/gwreports/docs/license.txt';
-$modversion['license_url'] = substr($modversion['license_url'],strpos($modversion['license_url'],'//')+2);
+$modversion['license_url'] = substr($modversion['license_url'], strpos($modversion['license_url'], '//')+2);
 $modversion['release_date']     = '2013/05/17';
 $modversion['module_website_url'] = 'geekwright.com';
 $modversion['module_website_name'] = 'geekwright, LLC';
@@ -57,40 +62,40 @@ $modversion['hasNotification'] = 0;
 // Config
 
 $modversion['config'][1] = array(
-	'name'			=> 'index_text' ,
-	'title'			=> '_MI_GWREPORTS_INDEX_TEXT' ,
-	'description'	=> '_MI_GWREPORTS_INDEX_TEXT_DSC' ,
-	'formtype'		=> 'textarea' ,
-	'valuetype'		=> 'text' ,
-	'default'		=> '' ,
-	'options'		=> array()
+    'name'            => 'index_text' ,
+    'title'            => '_MI_GWREPORTS_INDEX_TEXT' ,
+    'description'    => '_MI_GWREPORTS_INDEX_TEXT_DSC' ,
+    'formtype'        => 'textarea' ,
+    'valuetype'        => 'text' ,
+    'default'        => '' ,
+    'options'        => array()
 ) ;
 $modversion['config'][] = array(
-	'name'			=> 'show_breadcrumbs' ,
-	'title'			=> '_MI_GWREPORTS_SHOW_BREADCRUMBS' ,
-	'description'	=> '_MI_GWREPORTS_SHOW_BREADCRUMBS_DSC' ,
-	'formtype'		=> 'yesno' ,
-	'valuetype'		=> 'int' ,
-	'default'		=> '1' ,
-	'options'		=> array()
+    'name'            => 'show_breadcrumbs' ,
+    'title'            => '_MI_GWREPORTS_SHOW_BREADCRUMBS' ,
+    'description'    => '_MI_GWREPORTS_SHOW_BREADCRUMBS_DSC' ,
+    'formtype'        => 'yesno' ,
+    'valuetype'        => 'int' ,
+    'default'        => '1' ,
+    'options'        => array()
 ) ;
 $modversion['config'][] = array(
-	'name'			=> 'show_spreadsheet' ,
-	'title'			=> '_MI_GWREPORTS_SHOW_SPREADSHEET' ,
-	'description'	=> '_MI_GWREPORTS_SHOW_SPREADSHEET_DSC' ,
-	'formtype'		=> 'yesno' ,
-	'valuetype'		=> 'int' ,
-	'default'		=> '1' ,
-	'options'		=> array()
+    'name'            => 'show_spreadsheet' ,
+    'title'            => '_MI_GWREPORTS_SHOW_SPREADSHEET' ,
+    'description'    => '_MI_GWREPORTS_SHOW_SPREADSHEET_DSC' ,
+    'formtype'        => 'yesno' ,
+    'valuetype'        => 'int' ,
+    'default'        => '1' ,
+    'options'        => array()
 ) ;
 $modversion['config'][] = array(
-	'name'			=> 'show_print' ,
-	'title'			=> '_MI_GWREPORTS_SHOW_PRINT' ,
-	'description'	=> '_MI_GWREPORTS_SHOW_PRINT_DSC' ,
-	'formtype'		=> 'yesno' ,
-	'valuetype'		=> 'int' ,
-	'default'		=> '1' ,
-	'options'		=> array()
+    'name'            => 'show_print' ,
+    'title'            => '_MI_GWREPORTS_SHOW_PRINT' ,
+    'description'    => '_MI_GWREPORTS_SHOW_PRINT_DSC' ,
+    'formtype'        => 'yesno' ,
+    'valuetype'        => 'int' ,
+    'default'        => '1' ,
+    'options'        => array()
 ) ;
 
 // Database
@@ -106,7 +111,7 @@ $modversion['tables'][]  = 'gwreports_topic';
 $modversion['tables'][]  = 'gwreports_grouping';
 $modversion['tables'][]  = 'gwreports_column';
 
-// Blocks 
+// Blocks
 $modversion['blocks'][1] = array(
   'file' => 'blocks.php',
   'name' => _MI_GWREPORTS_BLOCK_TOPIC,
@@ -166,5 +171,3 @@ $modversion['templates'][] = array(
 $modversion['templates'][] = array(
   'file' => 'gwreports_autocomplete.html',
   'description' => 'Auto Complete Scripts and Styles' );
-
-?>

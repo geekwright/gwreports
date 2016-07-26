@@ -1,6 +1,8 @@
 <?php
 // @version    $Id: admin.php 15 2011-05-19 23:37:21Z rgriffith $
-if (!defined("XOOPS_ROOT_PATH")) die("Root path not defined");
+if (!defined("XOOPS_ROOT_PATH")) {
+    die("Root path not defined");
+}
 // Admin constants
 
 // Admin Menu
@@ -12,7 +14,7 @@ define('_AD_GWREPORTS_ADMENU_ABOUT', 'A propos');
 define("_AD_GWREPORTS_ADMENU_PREF", "Pr&eacute;f&eacute;rences");
 define("_AD_GWREPORTS_ADMENU_GOMOD", "Aller au module");
 if (!defined("_MI_GWREPORTS_ADMENU")) {
-@include_once dirname(__FILE__) . '/modinfo.php';
+    @include_once dirname(__FILE__) . '/modinfo.php';
 }
 
 
@@ -34,7 +36,7 @@ define('_AD_GWREPORTS_AD_IMPORT_FORMNAME', 'Importer une d&eacute;finition de ra
 define('_AD_GWREPORTS_AD_IMPORT_FILENAME', 'Fichier rapport &agrave; importer');
 define('_AD_GWREPORTS_AD_IMPORT_BUTTON', 'Importer');
 define('_AD_GWREPORTS_AD_IMPORT_ERROR', 'Import impossible');
-define('_AD_GWREPORTS_AD_IMPORT_BADFILE', 'fichier non compatible (doit être un fichier export&eacute; pr&eacute;c&eacute;demment)');
+define('_AD_GWREPORTS_AD_IMPORT_BADFILE', 'fichier non compatible (doit Ãªtre un fichier export&eacute; pr&eacute;c&eacute;demment)');
 define('_AD_GWREPORTS_AD_IMPORT_OK', 'Rapport import&eacute;');
 
 // Admin Explore
@@ -90,11 +92,10 @@ define('_AD_GW_ABOUT_AUTHOR', 'par');
 define('_AD_GW_ABOUT_CREDITS', 'Cr&eacute;dits');
 define('_AD_GW_ABOUT_LICENSE', 'Licence:');
 define('_AD_GW_ADMENU_PREF', 'Pr&eacute;f&eacute;rences');
-define('_AD_GW_ADMENU_GOMOD', 'Aller à Module');
+define('_AD_GW_ADMENU_GOMOD', 'Aller Ã  Module');
 define('_AD_GW_ADMENU_HELP', 'Page d\'aide');
 define('_AD_GW_ADMENU_TOADMIN', 'Retour &agrave; l\'administration du module');
 define('_AD_GW_ADMENU_WELCOME', 'Bienvenue sur gwreports!');
 define('_AD_GW_ADMENU_MESSAGE', '<img src="../images/icon_big.png" alt="Logo" style="float:left; margin-right:2em;" /> G&eacute;n&eacute;rateur de rapports');
 
 define('_AD_GWREPORTS_BAD_TOKEN', 'Le jeton de s&eacute;curit&eacute; n\'est pas valide.');
-?>
